@@ -1,0 +1,8 @@
+/phpunit.xml
+*~
+composer.lock
+/vendor/
+composer.phar
+/nbproject/
+.idea
+/tests-results
