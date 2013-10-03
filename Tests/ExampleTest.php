@@ -20,6 +20,7 @@ class ExampleTest extends PHPUnit_Framework_TestCase
 {
     public function testFirst()
     {
+        // just dummy
         $this->assertEquals(1, 1);
     }
 }
