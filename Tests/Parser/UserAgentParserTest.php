@@ -52,6 +52,7 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
         $ua = new UserAgentParser($this->confContainer);
         $ua->setUserAgent($uaStr);
         $b = $ua->getOs();
+        var_dump($b);
         $this->assertEquals('Linux', $b['name']);
     }
 
@@ -67,6 +68,7 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
         $ua = new UserAgentParser($this->confContainer);
         $ua->setUserAgent($uaStr);
         $b = $ua->getBrowser();
+        var_dump($b);
         $this->assertEquals('Chrome', $b['name']);
     }
 }
