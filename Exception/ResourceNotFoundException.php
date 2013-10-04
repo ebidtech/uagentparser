@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace EBT\Exception;
+namespace EBT\UAgentParser\Exception;
 
 /**
  * ResourceNotFoundException

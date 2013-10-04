@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace EBT\Exception;
+namespace EBT\Tests;
 
 use PHPUnit_Framework_TestCase;
 

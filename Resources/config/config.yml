@@ -1,0 +1,7 @@
+imports:
+    - { resource: expressions/browser.yml }
+    - { resource: expressions/mobile.yml }
+    - { resource: expressions/os.yml }
+    - { resource: mapping/browser.yml }
+    - { resource: mapping/device.yml }
+    - { resource: mapping/os.yml }
