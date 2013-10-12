@@ -6,3 +6,4 @@ composer.phar
 /nbproject/
 .idea
 /tests-results
+atlassian-ide-plugin.xml
