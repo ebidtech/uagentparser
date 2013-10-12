@@ -2,6 +2,19 @@ imports:
     - { resource: expressions/browser.yml }
     - { resource: expressions/mobile.yml }
     - { resource: expressions/os.yml }
-    - { resource: mapping/browser.yml }
-    - { resource: mapping/device.yml }
-    - { resource: mapping/os.yml }
+
+    - { resource: definitions/browser.yml }
+    - { resource: definitions/browser_family.yml }
+    - { resource: definitions/device_brand.yml }
+    - { resource: definitions/device_type.yml }
+    - { resource: definitions/os_family.yml }
+    - { resource: definitions/os_short.yml }
+    - { resource: definitions/desktop_os.yml }
+    
+    - { resource: mappings/browser.yml }
+    - { resource: mappings/browser_family.yml }
+    - { resource: mappings/device_brand.yml }
+    - { resource: mappings/device_type.yml }
+    - { resource: mappings/os_family.yml }
+    - { resource: mappings/os_short.yml }
+    - { resource: mappings/desktop_os.yml }    

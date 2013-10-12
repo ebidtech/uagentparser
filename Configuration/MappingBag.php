@@ -24,7 +24,7 @@ class MappingBag implements MappingBagInterface
     protected $osFamilyMappings;
 
     /**
-     * Sets browser mappings
+     * Sets browser Mappings
      *
      * @param $browserMappings
      *
@@ -37,7 +37,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Set browser family mappings
+     * Set browser family Mappings
      *
      * @param $browserFamilyMappings
      *
@@ -50,7 +50,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * sets device brands mappings
+     * sets device brands Mappings
      *
      * @param $deviceBrandMappings
      *
@@ -63,7 +63,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Sets device types mappings
+     * Sets device types Mappings
      *
      * @param $deviceTypeMappings
      *
@@ -76,7 +76,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Set Os short names mappings
+     * Set Os short names Mappings
      *
      * @param $osShortMappings
      *
@@ -89,7 +89,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Sets desktop Os names mappings
+     * Sets desktop Os names Mappings
      *
      * @param $desktopOsMappings
      *
@@ -102,7 +102,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * sets Os family names mappings
+     * sets Os family names Mappings
      *
      * @param $osFamilyMappings
      *
@@ -115,7 +115,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Gets all browser mappings
+     * Gets all browser Mappings
      *
      * @return array
      */
@@ -125,7 +125,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Gets all browser family mappings
+     * Gets all browser family Mappings
      *
      * @return array
      */
@@ -135,7 +135,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Gets all device brand mappings
+     * Gets all device brand Mappings
      *
      * @return array
      */
@@ -145,7 +145,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Gets all device type mappings
+     * Gets all device type Mappings
      *
      * @return array
      */
@@ -155,7 +155,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Gets all os short names mappings
+     * Gets all os short names Mappings
      *
      * @return array
      */
@@ -165,7 +165,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Gets all desktop os names mappings
+     * Gets all desktop os names Mappings
      *
      * @return array
      */
@@ -175,7 +175,7 @@ class MappingBag implements MappingBagInterface
     }
 
     /**
-     * Gets all os family names mappings
+     * Gets all os family names Mappings
      *
      * @return array
      */

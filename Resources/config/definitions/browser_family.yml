@@ -1,0 +1,36 @@
+parameters:
+    uap_definition_browser_family:
+        Android Browser:
+          - AN
+        BlackBerry Browser:
+          - BB
+        Chrome:
+          - CH
+          - CM
+          - CI
+          - CF
+          - CR
+          - RM
+        Firefox:
+          - FF
+          - FE
+          - SX
+          - FB
+          - PX
+          - MB
+        Internet Explorer:
+          - IE
+          - IM
+        Konqueror:
+          - KO
+        NetFront:
+          - NF
+        Nokia Browser:
+          - NB
+        Opera:
+          - OP
+          - OM
+          - OI
+        Safari:
+          - SF
+          - MF

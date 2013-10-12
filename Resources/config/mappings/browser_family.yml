@@ -1,0 +1,12 @@
+parameters:
+    uap_mapping_browser_family:
+        Android Browser: 1
+        BlackBerry Browser: 2
+        Chrome: 3
+        Firefox: 4
+        Internet Explorer: 5
+        Konqueror: 6
+        NetFront: 7
+        Nokia Browser: 8
+        Opera: 9
+        Safari: 10

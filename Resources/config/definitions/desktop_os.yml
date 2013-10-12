@@ -1,0 +1,7 @@
+parameters:
+    uap_definition_desktop_os:
+        - IBM
+        - Linux
+        - Mac
+        - Unix
+        - Windows

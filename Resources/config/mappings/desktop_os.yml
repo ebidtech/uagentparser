@@ -1,0 +1,7 @@
+parameters:
+    uap_mapping_desktop_os:
+        IBM: 1
+        Linux: 2
+        Mac: 3
+        Unix: 4
+        Windows: 5

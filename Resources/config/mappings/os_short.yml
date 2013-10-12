@@ -1,0 +1,78 @@
+parameters:
+    uap_mapping_os_short:
+        AIX: 1
+        Android: 2
+        Apple TV: 3
+        Arch Linux: 4
+        BackTrack: 5
+        Bada: 6
+        BlackBerry OS: 7
+        BlackBerry Tablet OS: 8
+        Bot: 9
+        Brew: 10
+        CentOS: 11
+        Chrome OS: 12
+        Debian: 13
+        DragonFly: 14
+        Fedora: 15
+        Firefox OS: 16
+        FreeBSD: 17
+        Gentoo: 18
+        Google TV: 19
+        HP-UX: 20
+        IRIX: 21
+        Knoppix: 22
+        Kubuntu: 23
+        Linux: 24
+        Lubuntu: 25
+        Mac: 26
+        Mandriva: 27
+        MeeGo: 28
+        Mint: 29
+        NetBSD: 30
+        Nintendo: 31
+        Nintendo Mobile: 32
+        OS/2: 33
+        OSF1: 34
+        OpenBSD: 35
+        PlayStation: 36
+        PlayStation 3: 37
+        Presto: 38
+        Puppy: 39
+        Red Hat: 40
+        SUSE: 41
+        Slackware: 42
+        Solaris: 43
+        Syllable: 44
+        Symbian: 45
+        Symbian OS: 46
+        Symbian OS Series 40: 47
+        Symbian OS Series 60: 48
+        Symbian^3: 49
+        Talkatone: 50
+        Tizen: 51
+        Ubuntu: 52
+        WebTV: 53
+        WinWAP: 54
+        Windows: 55
+        Windows 2000: 56
+        Windows 3.1: 57
+        Windows 7: 58
+        Windows 8: 59
+        Windows 95: 60
+        Windows 98: 61
+        Windows CE: 62
+        Windows ME: 63
+        Windows Mobile: 64
+        Windows NT: 65
+        Windows Phone: 66
+        Windows RT: 67
+        Windows Server 2003: 68
+        Windows Vista: 69
+        Windows XP: 70
+        Xbox: 71
+        Xubuntu: 72
+        YunOs: 73
+        iOS: 74
+        palmOS: 75
+        webOS: 76

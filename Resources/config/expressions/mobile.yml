@@ -1,6 +1,5 @@
 parameters:
     uap_expression_mobile:
-
         # HTC
         HTC:
           regex: 'HTC|Sprint APA|ADR[A-Za-z0-9]+'

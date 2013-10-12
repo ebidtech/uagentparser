@@ -12,6 +12,7 @@
 namespace EBT\UAgentParser\Configuration;
 
 use EBT\UAgentParser\Configuration\ExpressionBagInterface;
+use EBT\UAgentParser\Configuration\DefinitionBagInterface;
 use EBT\UAgentParser\Configuration\MappingBagInterface;
 
 class Container implements ContainerInterface
@@ -20,6 +21,11 @@ class Container implements ContainerInterface
      * @var ExpressionBagInterface
      */
     protected $expressionsBag;
+
+    /**
+     * @var DefinitionBagInterface
+     */
+    protected $definitionsBag;
 
     /**
      * @var MappingBagInterface
@@ -32,6 +38,7 @@ class Container implements ContainerInterface
     public function __construct()
     {
         $this->expressionsBag = new ExpressionBag();
+        $this->definitionsBag = new DefinitionBag();
         $this->mappingsBag = new MappingBag();
     }
 
@@ -55,6 +62,28 @@ class Container implements ContainerInterface
     public function setExpressions(ExpressionBagInterface $expressions)
     {
         $this->expressionsBag = $expressions;
+    }
+
+    /**
+     * Gets all definitions
+     *
+     * @return DefinitionBagInterface
+     */
+    public function getDefinitions()
+    {
+        return $this->definitionsBag;
+    }
+
+    /**
+     * Sets all the definitions
+     *
+     * @param DefinitionBagInterface $definitions
+     *
+     * @return ContainerInterface
+     */
+    public function setDefinitions(DefinitionBagInterface $definitions)
+    {
+        $this->definitionsBag = $definitions;
     }
 
     /**

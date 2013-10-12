@@ -1,0 +1,9 @@
+parameters:
+    uap_definition_device_type:
+        desktop: desktop
+        smartphone: smartphone
+        tablet: tablet
+        'feature phone': feature phone
+        console: console
+        tv: tv
+        'car browser': car browser

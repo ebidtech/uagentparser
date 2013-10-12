@@ -32,18 +32,18 @@ interface ContainerInterface
     public function setExpressions(ExpressionBagInterface $expressions);
 
     /**
-     * Gets all mappings
+     * Gets all definitions
      *
-     * @return MappingBagInterface
+     * @return DefinitionBagInterface
      */
-    public function getMappings();
+    public function getDefinitions();
 
     /**
-     * Sets all the mappings
+     * Sets all the definitions
      *
-     * @param MappingBagInterface $mappings
+     * @param DefinitionBagInterface $definitions
      *
      * @return ContainerInterface
      */
-    public function setMappings(MappingBagInterface $mappings);
+    public function setDefinitions(DefinitionBagInterface $definitions);
 }

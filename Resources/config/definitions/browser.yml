@@ -1,0 +1,77 @@
+parameters:
+    uap_definition_browser:
+        AB: ABrowse
+        AM: Amaya
+        AN: Android Browser
+        AR: Arora
+        AV: Amiga Voyager
+        AW: Amiga Aweb
+        BB: BlackBerry Browser
+        BD: Baidu Browser
+        BE: Beonex
+        BX: BrowseX
+        CA: Camino
+        CF: Chrome Frame
+        CH: Chrome
+        CI: Chrome Mobile iOS
+        CK: Conkeror
+        CM: Chrome Mobile
+        CO: CometBird
+        CR: Chromium
+        CS: Cheshire
+        DF: Dolphin
+        DI: Dillo
+        EL: Elinks
+        EP: Epiphany
+        FB: Firebird
+        FD: Fluid
+        FE: Fennec
+        FF: Firefox
+        FL: Flock
+        FN: Fireweb Navigator
+        GA: Galeon
+        GE: Google Earth
+        HJ: HotJava
+        IB: IBrowse
+        IC: iCab
+        IE: Internet Explorer
+        IM: IE Mobile
+        IR: Iron
+        JS: Jasmine
+        KI: Kindle Browser
+        KM: K-meleon
+        KO: Konqueror
+        KP: Kapiko
+        KZ: Kazehakase
+        LG: Lightning
+        LI: Links
+        LX: Lynx
+        MB: MicroB
+        MC: NCSA Mosaic
+        MF: Mobile Safari
+        MI: Midori
+        MS: Mobile Silk
+        MX: Maxthon
+        NB: Nokia Browser
+        NF: NetFront
+        NL: NetFront Life
+        NS: Netscape
+        OB: Obigo
+        OI: Opera Mini
+        OM: Opera Mobile
+        OP: Opera
+        OV: Openwave Mobile Browser
+        OW: OmniWeb
+        PL: Palm Blazer
+        PR: Palm Pre
+        PX: Phoenix
+        RK: Rekonq
+        RM: RockMelt
+        SF: Safari
+        SM: SeaMonkey
+        SN: Snowshoe
+        SX: Swiftfox
+        TZ: Tizen Browser
+        UC: UC Browser
+        WO: wOSBrowser
+        YA: Yandex Browser

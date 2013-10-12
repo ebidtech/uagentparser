@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is a part of the user agent parser.
  *
@@ -9,18 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace EBT\Tests;
+namespace EBT\UAgentParser\Entities\Os\Family;
 
-use PHPUnit_Framework_TestCase;
+use EBT\UAgentParser\Entities\EntityInterface;
 
 /**
- * ExampleTest
+ * Interface Os Family
+ *
  */
-class ExampleTest extends PHPUnit_Framework_TestCase
+interface FamilyInterface extends EntityInterface
 {
-    public function testFirst()
-    {
-        // just dummy
-        $this->assertEquals(1, 1);
-    }
 }

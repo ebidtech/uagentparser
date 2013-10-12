@@ -94,25 +94,46 @@ class YamlFileLoader extends FileLoader
                         case 'uap_expression_os':
                             $this->container->getExpressions()->setOs($value);
                             break;
-                        case 'uap_mappping_browser':
+                        case 'uap_definition_browser':
+                            $this->container->getDefinitions()->setBrowser($value);
+                            break;
+                        case 'uap_definition_browser_family':
+                            $this->container->getDefinitions()->setBrowserFamily($value);
+                            break;
+                        case 'uap_definition_device_type':
+                            $this->container->getDefinitions()->setDeviceType($value);
+                            break;
+                        case 'uap_definition_device_brand':
+                            $this->container->getDefinitions()->setDeviceBrand($value);
+                            break;
+                        case 'uap_definition_os_family':
+                            $this->container->getDefinitions()->setOsFamily($value);
+                            break;
+                        case 'uap_definition_desktop_os':
+                            $this->container->getDefinitions()->setDesktopOs($value);
+                            break;
+                        case 'uap_definition_os_short':
+                            $this->container->getDefinitions()->setOsShort($value);
+                            break;                        
+                        case 'uap_mapping_browser':
                             $this->container->getMappings()->setBrowser($value);
                             break;
-                        case 'uap_mappping_browser_family':
+                        case 'uap_mapping_browser_family':
                             $this->container->getMappings()->setBrowserFamily($value);
                             break;
-                        case 'uap_mappping_device_type':
+                        case 'uap_mapping_device_type':
                             $this->container->getMappings()->setDeviceType($value);
                             break;
-                        case 'uap_mappping_device_brand':
+                        case 'uap_mapping_device_brand':
                             $this->container->getMappings()->setDeviceBrand($value);
                             break;
-                        case 'uap_mappping_os_family':
+                        case 'uap_mapping_os_family':
                             $this->container->getMappings()->setOsFamily($value);
                             break;
-                        case 'uap_mappping_desktop_os':
+                        case 'uap_mapping_desktop_os':
                             $this->container->getMappings()->setDesktopOs($value);
                             break;
-                        case 'uap_mappping_os_short':
+                        case 'uap_mapping_os_short':
                             $this->container->getMappings()->setOsShort($value);
                             break;
                     }

@@ -1,0 +1,23 @@
+parameters:
+    uap_mapping_os_family:
+        Android: 1
+        Apple TV: 2
+        BlackBerry: 3
+        Bot: 4
+        Brew: 5
+        Chrome OS: 6
+        Firefox OS: 7
+        Gaming Console: 8
+        Google TV: 9
+        IBM: 10
+        iOS: 11
+        Linux: 12
+        Mac: 13
+        Mobile Gaming Console: 14
+        Other Mobile: 15
+        Simulator: 16
+        Symbian: 17
+        Unix: 18
+        WebTV: 19
+        Windows: 20
+        Windows Mobile: 21
