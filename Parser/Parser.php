@@ -86,7 +86,7 @@ class Parser implements ParserInterface
     public function setUserAgent($userAgent, $parseAll = true)
     {
         $this->userAgent = $userAgent;
-        if($parseAll){
+        if (true == $parseAll) {
             $this->parse();
         }
         return $this;
@@ -171,6 +171,7 @@ class Parser implements ParserInterface
     {
         return $this->deviceType;
     }
+
     /**
      * Get Type full name
      *
@@ -250,8 +251,9 @@ class Parser implements ParserInterface
     public function parse()
     {
         $this->parseOs();
-        if ($this->isBot() || $this->isSimulator())
+        if ($this->isBot() || $this->isSimulator()) {
             return $this;
+        }
 
         $this->parseBrowser();
 
@@ -336,8 +338,6 @@ class Parser implements ParserInterface
         }
         return in_array($decodedFamily, $this->desktopOsArray);
     }
-
-
 
 
     /* -------------------------------- PRIVATE / PROTECTED METHODS ----------------------------------- */
@@ -519,12 +519,14 @@ class Parser implements ParserInterface
     {
         foreach ($this->getOsRegexes() as $osRegex) {
             $matches = $this->matchUserAgent($osRegex['regex']);
-            if ($matches)
+            if ($matches) {
                 break;
+            }
         }
 
-        if (!$matches)
+        if (!$matches) {
             return;
+        }
 
         if (in_array($osRegex['name'], $this->osShorts)) {
             $short = $this->osShorts[$osRegex['name']];
@@ -547,17 +549,19 @@ class Parser implements ParserInterface
     {
         foreach ($this->getBrowserRegexes() as $browserRegex) {
             $matches = $this->matchUserAgent($browserRegex['regex']);
-            if ($matches)
+            if ($matches) {
                 break;
+            }
         }
 
-        if (!$matches)
+        if (!$matches) {
             return;
+        }
 
         if (in_array($browserRegex['name'], $this->browsers)) {
             $short = array_search($browserRegex['name'], $this->browsers);
         } else {
-            $short = 'XX';
+            $short = 'NA';
         }
 
         $this->browser = array(
@@ -578,18 +582,20 @@ class Parser implements ParserInterface
     {
         foreach ($mobileRegexes as $brand => $mobileRegex) {
             $matches = $this->matchUserAgent($mobileRegex['regex']);
-            if ($matches)
+            if ($matches) {
                 break;
+            }
         }
 
-        if (!$matches)
+        if (!$matches) {
             return;
+        }
         $this->brand = array_search($brand, $this->deviceBrands);
         $this->brandFullName = $brand;
 
         if (isset($mobileRegex['device'])) {
             $this->deviceTypeFull = $mobileRegex['device'];
-            $this->deviceType = array_search($this->deviceTypeFull,$this->deviceTypes);
+            $this->deviceType = array_search($this->deviceTypeFull, $this->deviceTypes);
         }
 
         if (isset($mobileRegex['model'])) {
@@ -599,13 +605,15 @@ class Parser implements ParserInterface
 
     protected function parseModel($mobileRegexes)
     {
-        if (empty($this->brand) || !empty($this->modelName))
+        if (empty($this->brand) || !empty($this->modelName)) {
             return;
+        }
 
         foreach ($mobileRegexes[$this->brandFullName]['models'] as $modelRegex) {
             $matches = $this->matchUserAgent($modelRegex['regex']);
-            if ($matches)
+            if ($matches) {
                 break;
+            }
         }
 
         if (!$matches) {
@@ -616,7 +624,7 @@ class Parser implements ParserInterface
 
         if (isset($modelRegex['device'])) {
             $this->deviceTypeFull = $modelRegex['device'];
-            $this->deviceType = array_search($this->deviceTypeFull,$this->deviceTypes);
+            $this->deviceType = array_search($this->deviceTypeFull, $this->deviceTypes);
         }
     }
 
@@ -734,8 +742,9 @@ class Parser implements ParserInterface
      */
     protected function buildByMatch($item, $matches, $nb = '1')
     {
-        if (strpos($item, '$' . $nb) === false)
+        if (false === strpos($item, '$' . $nb)) {
             return $item;
+        }
 
         $replace = isset($matches[$nb]) ? $matches[$nb] : '';
         return trim(str_replace('$' . $nb, $replace, $item));

@@ -77,5 +77,4 @@ abstract class Entity implements EntityInterface
         $this->nameShort = $nameShort;
         return $this;
     }
-
 }

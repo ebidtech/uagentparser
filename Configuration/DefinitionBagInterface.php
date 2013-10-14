@@ -124,5 +124,4 @@ interface DefinitionBagInterface
      * @return array
      */
     public function getOsFamily();
-
 }

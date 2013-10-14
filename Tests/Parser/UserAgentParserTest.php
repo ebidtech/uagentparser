@@ -21,7 +21,7 @@ use EBT\UAgentParser\Parser\Parser;
 /**
  * Class UserAgentParserTest
  *
- * @group unit
+ * @group   unit
  * @package EBT\Tests\Unit
  */
 class UserAgentParserTest extends PHPUnit_Framework_TestCase
@@ -50,7 +50,8 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
     /**
      * Test if Definitions are being read from YAML
      */
-    public function testDefArrays(){
+    public function testDefArrays()
+    {
         $this->assertTrue(is_array($this->confContainer->getDefinitions()->getDeviceType()));
         $this->assertTrue(is_array($this->confContainer->getDefinitions()->getDeviceBrand()));
         $this->assertTrue(is_array($this->confContainer->getDefinitions()->getOsShort()));
@@ -89,7 +90,8 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
     /**
      * test if is a Bot
      */
-    public function testIsBot(){
+    public function testIsBot()
+    {
         $uaStr = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
         $this->ua->setUserAgent($uaStr);
         $this->assertTrue($this->ua->isBot());
@@ -98,7 +100,8 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
     /**
      * test if is mobile
      */
-    public function testIsMobile(){
+    public function testIsMobile()
+    {
         $uaStr = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) ';
         $uaStr .= 'Chrome/29.0.1547.76 Safari/537.36';
         $this->ua->setUserAgent($uaStr);

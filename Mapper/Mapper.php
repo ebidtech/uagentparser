@@ -15,8 +15,6 @@ use EBT\UAgentParser\Exception\ResourceNotFoundException;
 
 /**
  * Class Mapper
- *
- * @package EBT\Mapper
  */
 class Mapper implements MapperInterface
 {
@@ -25,7 +23,7 @@ class Mapper implements MapperInterface
      */
     protected $maps;
 
-    public function __constructor()
+    public function __construct()
     {
         $this->maps = array();
     }
@@ -128,8 +126,8 @@ class Mapper implements MapperInterface
     {
         if (!is_array($mappingTable)) {
             throw new \InvalidArgumentException(
-                sprintf('mappingTable must be an array, %s given.', gettype($mappingTable)
-                ));
+                sprintf('mappingTable must be an array, %s given.', gettype($mappingTable))
+            );
         }
         $this->maps[$mapName] = $mappingTable;
     }
@@ -196,6 +194,4 @@ class Mapper implements MapperInterface
         }
         return $key;
     }
-
-
 }

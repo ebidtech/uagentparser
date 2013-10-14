@@ -134,5 +134,4 @@ interface ParserInterface
      * @return array
      */
     public function getOsNameFromId($os, $ver);
-
 }

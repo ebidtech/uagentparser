@@ -124,5 +124,4 @@ interface MappingBagInterface
      * @return array
      */
     public function getOsFamily();
-
 }

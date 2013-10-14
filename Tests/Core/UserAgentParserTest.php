@@ -13,7 +13,6 @@ namespace EBT\UAgentParser\Tests\Core;
 use PHPUnit_Framework_TestCase;
 use EBT\UAgentParser\Core\UserAgentParser;
 
-
 /**
  * Class UserAgentParserTest
  *

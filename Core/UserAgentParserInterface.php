@@ -63,5 +63,4 @@ interface UserAgentParserInterface
      * @throws \EBT\UAgentParser\Exception\InvalidUserAgentStrException
      */
     public function getOs();
-
 }

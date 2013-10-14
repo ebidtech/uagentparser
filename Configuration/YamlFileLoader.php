@@ -80,11 +80,16 @@ class YamlFileLoader extends FileLoader
 
         foreach ($content['imports'] as $import) {
             $this->setCurrentDir(dirname($file));
-            $content = $this->import($import['resource'], null, isset($import['ignore_errors']) ? (Boolean) $import['ignore_errors'] : false, $file);
+            $content = $this->import(
+                $import['resource'],
+                null,
+                isset($import['ignore_errors']) ? (Boolean) $import['ignore_errors'] : false,
+                $file
+            );
             // parameters
             if (isset($content['parameters'])) {
                 foreach ($content['parameters'] as $key => $value) {
-                    switch($key){
+                    switch ($key) {
                         case 'uap_expression_browser':
                             $this->container->getExpressions()->setBrowser($value);
                             break;
@@ -114,7 +119,7 @@ class YamlFileLoader extends FileLoader
                             break;
                         case 'uap_definition_os_short':
                             $this->container->getDefinitions()->setOsShort($value);
-                            break;                        
+                            break;
                         case 'uap_mapping_browser':
                             $this->container->getMappings()->setBrowser($value);
                             break;

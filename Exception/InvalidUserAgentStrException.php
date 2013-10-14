@@ -16,5 +16,4 @@ namespace EBT\UAgentParser\Exception;
  */
 class InvalidUserAgentStrException extends \RuntimeException
 {
-
 }

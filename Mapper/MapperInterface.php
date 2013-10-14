@@ -82,6 +82,4 @@ interface MapperInterface
      * @return array
      */
     public function getAllMaps();
-
-
 }

@@ -18,11 +18,10 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 
-
 /**
  * Class MapperTest
  *
- * @group unit
+ * @group   unit
  * @package EBT\Tests\Unit
  */
 class MapperTest extends PHPUnit_Framework_TestCase
@@ -104,5 +103,4 @@ class MapperTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Android', $m1->getFromInMap(1, 'os_family'));
         $this->assertEquals('AIX', $m1->getFromInMap(1, 'os_short'));
     }
-
 }

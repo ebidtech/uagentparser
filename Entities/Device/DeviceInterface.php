@@ -47,6 +47,5 @@ interface DeviceInterface extends EntityInterface
      *
      * @return DeviceInterface
      */
-    public function setType(TypeInterface $type);    
-
+    public function setType(TypeInterface $type);
 }

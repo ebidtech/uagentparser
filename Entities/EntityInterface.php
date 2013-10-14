@@ -58,6 +58,4 @@ interface EntityInterface
      * @return EntityInterface
      */
     public function setNameShort($nameShort);
-
-
 }

@@ -16,5 +16,4 @@ namespace EBT\UAgentParser\Exception;
  */
 class ResourceNotFoundException extends \RuntimeException
 {
-
 }

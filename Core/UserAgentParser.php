@@ -30,10 +30,11 @@ use EBT\UAgentParser\Entities\Browser\Family\Family as BrowserFamily;
 use EBT\UAgentParser\Entities\Os\Family\Family as OsFamily;
 use EBT\UAgentParser\Entities\Device\Brand\Brand as DeviceBrand;
 
-;
 use EBT\UAgentParser\Entities\Device\Type\Type as DeviceType;
 
-
+/**
+ * Class UserAgentParser
+ */
 class UserAgentParser implements UserAgentParserInterface
 {
     const MAP_NAME_BROWSER = 'browser';
@@ -156,7 +157,9 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getBrowser()
     {
-        if (is_null($this->parser->getUserAgent()) || strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH) {
+        if (is_null($this->parser->getUserAgent()) ||
+            strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
+        ) {
             throw new InvalidUserAgentStrException();
         }
         if ($this->rebuildBrowser) {
@@ -184,7 +187,9 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getDevice()
     {
-        if (is_null($this->parser->getUserAgent()) || strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH) {
+        if (is_null($this->parser->getUserAgent()) ||
+            strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
+        ) {
             throw new InvalidUserAgentStrException();
         }
         if ($this->rebuildDevice) {
@@ -227,7 +232,9 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getOs()
     {
-        if (is_null($this->parser->getUserAgent()) || strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH) {
+        if (is_null($this->parser->getUserAgent()) ||
+            strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
+        ) {
             throw new InvalidUserAgentStrException();
         }
         if ($this->rebuildOs) {
@@ -266,5 +273,4 @@ class UserAgentParser implements UserAgentParserInterface
             throw new ResourceNotFoundException;
         }
     }
-
 }
