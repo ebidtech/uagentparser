@@ -1,6 +1,6 @@
 {
     "name": "ebidtech/uagentparser",
-    "type": "User agent parser",
+    "type": "library",
     "description": "User agent parser",
     "keywords": ["user", "agent", "parser", "php"],
     "homepage": "http://github.com/ebidtech/uagentparser",
