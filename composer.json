@@ -23,5 +23,5 @@
         "psr-0": { "EBT\\UAgentParser": "" }
     },
     "minimum-stability": "stable",
-    "target-dir": "EBT/KVDBL"
+    "target-dir": "EBT/UAgentParser"
 }
