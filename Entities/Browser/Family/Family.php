@@ -14,8 +14,6 @@ use EBT\UAgentParser\Entities\Entity;
 
 /**
  * Class Operating System
- *
- * @package EBT\Entities
  */
 class Family extends Entity implements FamilyInterface
 {

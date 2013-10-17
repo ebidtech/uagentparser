@@ -14,7 +14,6 @@ use EBT\UAgentParser\Entities\EntityInterface;
 
 /**
  * Interface TypeInterface
- *
  */
 interface TypeInterface extends EntityInterface
 {

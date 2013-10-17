@@ -12,8 +12,6 @@ namespace EBT\UAgentParser\Entities;
 
 /**
  * Interface EntityInterface
- *
- * @package EBT\Entities
  */
 interface EntityInterface
 {

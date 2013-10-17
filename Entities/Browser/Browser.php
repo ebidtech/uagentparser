@@ -15,8 +15,6 @@ use EBT\UAgentParser\Entities\Browser\Family\FamilyInterface;
 
 /**
  * Class Browser
- *
- * @package EBT\Entities
  */
 class Browser extends Entity implements BrowserInterface
 {
@@ -27,8 +25,6 @@ class Browser extends Entity implements BrowserInterface
 
     /**
      * @return FamilyInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getFamily()
     {
@@ -38,11 +34,12 @@ class Browser extends Entity implements BrowserInterface
     /**
      * @param FamilyInterface $family
      *
-     * @return OsInterface
+     * @return BrowserInterface
      */
     public function setFamily(FamilyInterface $family)
     {
         $this->family = $family;
+
         return $this;
     }
 }

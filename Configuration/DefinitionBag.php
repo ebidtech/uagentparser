@@ -11,26 +11,51 @@
 
 namespace EBT\UAgentParser\Configuration;
 
-use EBT\UAgentParser\Configuration\DefinitionBagInterface;
-
 class DefinitionBag implements DefinitionBagInterface
 {
+    /**
+     * @var array
+     */
     protected $browserDefinitions;
+
+    /**
+     * @var array
+     */
     protected $browserFamilyDefinitions;
+
+    /**
+     * @var array
+     */
     protected $deviceBrandDefinitions;
+
+    /**
+     * @var array
+     */
     protected $deviceTypeDefinitions;
+
+    /**
+     * @var array
+     */
     protected $osShortDefinitions;
+
+    /**
+     * @var array
+     */
     protected $desktopOsDefinitions;
+
+    /**
+     * @var array
+     */
     protected $osFamilyDefinitions;
 
     /**
      * Sets browser Definitions
      *
-     * @param $browserDefinitions
+     * @param array $browserDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setBrowser($browserDefinitions)
+    public function setBrowser(array $browserDefinitions)
     {
         $this->browserDefinitions = $browserDefinitions;
         return $this;
@@ -39,11 +64,11 @@ class DefinitionBag implements DefinitionBagInterface
     /**
      * Set browser family Definitions
      *
-     * @param $browserFamilyDefinitions
+     * @param array $browserFamilyDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setBrowserFamily($browserFamilyDefinitions)
+    public function setBrowserFamily(array $browserFamilyDefinitions)
     {
         $this->browserFamilyDefinitions = $browserFamilyDefinitions;
         return $this;
@@ -52,11 +77,11 @@ class DefinitionBag implements DefinitionBagInterface
     /**
      * sets device brands Definitions
      *
-     * @param $deviceBrandDefinitions
+     * @param array $deviceBrandDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setDeviceBrand($deviceBrandDefinitions)
+    public function setDeviceBrand(array $deviceBrandDefinitions)
     {
         $this->deviceBrandDefinitions = $deviceBrandDefinitions;
         return $this;
@@ -65,11 +90,11 @@ class DefinitionBag implements DefinitionBagInterface
     /**
      * Sets device types Definitions
      *
-     * @param $deviceTypeDefinitions
+     * @param array $deviceTypeDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setDeviceType($deviceTypeDefinitions)
+    public function setDeviceType(array $deviceTypeDefinitions)
     {
         $this->deviceTypeDefinitions = $deviceTypeDefinitions;
         return $this;
@@ -78,11 +103,11 @@ class DefinitionBag implements DefinitionBagInterface
     /**
      * Set Os short names Definitions
      *
-     * @param $osShortDefinitions
+     * @param array $osShortDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setOsShort($osShortDefinitions)
+    public function setOsShort(array $osShortDefinitions)
     {
         $this->osShortDefinitions = $osShortDefinitions;
         return $this;
@@ -91,11 +116,11 @@ class DefinitionBag implements DefinitionBagInterface
     /**
      * Sets desktop Os names Definitions
      *
-     * @param $desktopOsDefinitions
+     * @param array $desktopOsDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setDesktopOs($desktopOsDefinitions)
+    public function setDesktopOs(array $desktopOsDefinitions)
     {
         $this->desktopOsDefinitions = $desktopOsDefinitions;
         return $this;
@@ -104,11 +129,11 @@ class DefinitionBag implements DefinitionBagInterface
     /**
      * sets Os family names Definitions
      *
-     * @param $osFamilyDefinitions
+     * @param array $osFamilyDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setOsFamily($osFamilyDefinitions)
+    public function setOsFamily(array $osFamilyDefinitions)
     {
         $this->osFamilyDefinitions = $osFamilyDefinitions;
         return $this;

@@ -28,19 +28,16 @@ class Mapper implements MapperInterface
         $this->maps = array();
     }
 
-
-    /**
-     * @var ConfContainer
-     */
-    protected $confContainer;
-
     /**
      * Gets the destination data for specified source
      *
      * @param      $source
      *
      * @return array
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
+     *
+     * @throws ResourceNotFoundException
+     *
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      **/
     public function getTo($source)
     {
@@ -54,9 +51,11 @@ class Mapper implements MapperInterface
             }
 
         }
-        if (empty($results)) {
+
+        if ($results == array()) {
             throw new ResourceNotFoundException('Source %s was not found in any map.');
         }
+
         return $results;
     }
 
@@ -66,7 +65,10 @@ class Mapper implements MapperInterface
      * @param      $destination
      *
      * @return array
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
+     *
+     * @throws ResourceNotFoundException
+     *
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function getFrom($destination)
     {
@@ -80,9 +82,11 @@ class Mapper implements MapperInterface
             }
 
         }
-        if (empty($results)) {
+
+        if ($results == array()) {
             throw new ResourceNotFoundException('Destination %s was not found in any map.');
         }
+
         return $results;
     }
 
@@ -92,7 +96,7 @@ class Mapper implements MapperInterface
      * @param      $source
      * @param null $mapName
      *
-     * @return Object
+     * @return object
      */
     public function getToInMap($source, $mapName)
     {
@@ -105,7 +109,7 @@ class Mapper implements MapperInterface
      * @param      $destination
      * @param null $mapName
      *
-     * @return Object
+     * @return object
      */
     public function getFromInMap($destination, $mapName)
     {
@@ -115,29 +119,22 @@ class Mapper implements MapperInterface
     /**
      * Sets a map
      *
-     * @param $mapName
-     * @param $mappingTable
+     * @param string $mapName
+     * @param array  $mappingTable
      *
      * @return MapperInterface
-     *
-     * @throws \InvalidArgumentException
      */
-    public function setMap($mapName, $mappingTable)
+    public function setMap($mapName, array $mappingTable)
     {
-        if (!is_array($mappingTable)) {
-            throw new \InvalidArgumentException(
-                sprintf('mappingTable must be an array, %s given.', gettype($mappingTable))
-            );
-        }
         $this->maps[$mapName] = $mappingTable;
     }
 
     /**
      * Gets a specified map
      *
-     * @param $mapName
+     * @param string $mapName
      *
-     * @return Array
+     * @return array
      */
     public function getMap($mapName)
     {
@@ -161,7 +158,8 @@ class Mapper implements MapperInterface
      * @param $key
      *
      * @return mixed
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
+     *
+     * @throws ResourceNotFoundException
      */
     protected function searchMap($mapName, $key)
     {
@@ -171,17 +169,19 @@ class Mapper implements MapperInterface
         if (!array_key_exists($key, $this->maps[$mapName])) {
             throw new ResourceNotFoundException(sprintf('Key %s was not found in %s.', $key, $mapName));
         }
+
         return $this->maps[$mapName][$key];
     }
 
     /**
      * Search for a value for a given key
      *
-     * @param $mapName
-     * @param $value
+     * @param string $mapName
+     * @param mixed $value
      *
      * @return mixed
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
+     *
+     * @throws ResourceNotFoundException
      */
     protected function reverseMap($mapName, $value)
     {
@@ -192,6 +192,7 @@ class Mapper implements MapperInterface
         if (!$key) {
             throw new ResourceNotFoundException(sprintf('Value %s was not found in %s.', $value, $mapName));
         }
+
         return $key;
     }
 }

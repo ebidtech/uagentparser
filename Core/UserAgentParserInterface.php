@@ -14,6 +14,7 @@ namespace EBT\UAgentParser\Core;
 use EBT\UAgentParser\Entities\Browser\BrowserInterface;
 use EBT\UAgentParser\Entities\Device\DeviceInterface;
 use EBT\UAgentParser\Entities\Os\OsInterface;
+use EBT\UAgentParser\Exception\InvalidUserAgentStrException;
 
 interface UserAgentParserInterface
 {
@@ -44,7 +45,8 @@ interface UserAgentParserInterface
      * Returns Browser
      *
      * @return BrowserInterface
-     * @throws \EBT\UAgentParser\Exception\InvalidUserAgentStrException
+     *
+     * @throws InvalidUserAgentStrException
      */
     public function getBrowser();
 
@@ -52,7 +54,8 @@ interface UserAgentParserInterface
      * Returns Device
      *
      * @return DeviceInterface
-     * @throws \EBT\UAgentParser\Exception\InvalidUserAgentStrException
+     *
+     * @throws InvalidUserAgentStrException
      */
     public function getDevice();
 
@@ -60,7 +63,8 @@ interface UserAgentParserInterface
      * Returns Os
      *
      * @return OsInterface
-     * @throws \EBT\UAgentParser\Exception\InvalidUserAgentStrException
+     *
+     * @throws InvalidUserAgentStrException
      */
     public function getOs();
 }

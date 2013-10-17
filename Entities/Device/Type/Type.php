@@ -14,7 +14,6 @@ use EBT\UAgentParser\Entities\Entity;
 
 /**
  * Class Device Type
- *
  */
 class Type extends Entity implements TypeInterface
 {

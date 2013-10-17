@@ -15,8 +15,19 @@ use EBT\UAgentParser\Configuration\ExpressionBagInterface;
 
 class ExpressionBag implements ExpressionBagInterface
 {
+    /**
+     * @var array
+     */
     protected $browserExpressions;
+
+    /**
+     * @var array
+     */
     protected $mobileExpressions;
+
+    /**
+     * @var array
+     */
     protected $osExpressions;
 
     /**
@@ -41,6 +52,7 @@ class ExpressionBag implements ExpressionBagInterface
 
     /**
      * Gets all Os expressions
+     *
      * @return array
      */
     public function getOs()
@@ -51,11 +63,11 @@ class ExpressionBag implements ExpressionBagInterface
     /**
      * Set browser expressions
      *
-     * @param $browserExpressions
+     * @param array $browserExpressions
      *
      * @return ExpressionBagInterface
      */
-    public function setBrowser($browserExpressions)
+    public function setBrowser(array $browserExpressions)
     {
         $this->browserExpressions = $browserExpressions;
     }
@@ -63,11 +75,11 @@ class ExpressionBag implements ExpressionBagInterface
     /**
      * Set mobile expressions
      *
-     * @param $mobileExpressions
+     * @param array $mobileExpressions
      *
      * @return ExpressionBagInterface
      */
-    public function setMobile($mobileExpressions)
+    public function setMobile(array $mobileExpressions)
     {
         $this->mobileExpressions = $mobileExpressions;
     }
@@ -75,11 +87,11 @@ class ExpressionBag implements ExpressionBagInterface
     /**
      * Set Os expressions
      *
-     * @param $osExpressions
+     * @param array $osExpressions
      *
      * @return ExpressionBagInterface
      */
-    public function setOs($osExpressions)
+    public function setOs(array $osExpressions)
     {
         $this->osExpressions = $osExpressions;
     }

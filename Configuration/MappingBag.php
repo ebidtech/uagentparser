@@ -11,26 +11,51 @@
 
 namespace EBT\UAgentParser\Configuration;
 
-use EBT\UAgentParser\Configuration\MappingBagInterface;
-
 class MappingBag implements MappingBagInterface
 {
+    /**
+     * @var array
+     */
     protected $browserMappings;
+
+    /**
+     * @var array
+     */
     protected $browserFamilyMappings;
+
+    /**
+     * @var array
+     */
     protected $deviceBrandMappings;
+
+    /**
+     * @var array
+     */
     protected $deviceTypeMappings;
+
+    /**
+     * @var array
+     */
     protected $osShortMappings;
+
+    /**
+     * @var array
+     */
     protected $desktopOsMappings;
+
+    /**
+     * @var array
+     */
     protected $osFamilyMappings;
 
     /**
      * Sets browser Mappings
      *
-     * @param $browserMappings
+     * @param array $browserMappings
      *
      * @return MappingBagInterface
      */
-    public function setBrowser($browserMappings)
+    public function setBrowser(array $browserMappings)
     {
         $this->browserMappings = $browserMappings;
         return $this;
@@ -39,11 +64,11 @@ class MappingBag implements MappingBagInterface
     /**
      * Set browser family Mappings
      *
-     * @param $browserFamilyMappings
+     * @param array $browserFamilyMappings
      *
      * @return MappingBagInterface
      */
-    public function setBrowserFamily($browserFamilyMappings)
+    public function setBrowserFamily(array $browserFamilyMappings)
     {
         $this->browserFamilyMappings = $browserFamilyMappings;
         return $this;
@@ -52,11 +77,11 @@ class MappingBag implements MappingBagInterface
     /**
      * sets device brands Mappings
      *
-     * @param $deviceBrandMappings
+     * @param array $deviceBrandMappings
      *
      * @return MappingBagInterface
      */
-    public function setDeviceBrand($deviceBrandMappings)
+    public function setDeviceBrand(array $deviceBrandMappings)
     {
         $this->deviceBrandMappings = $deviceBrandMappings;
         return $this;
@@ -65,11 +90,11 @@ class MappingBag implements MappingBagInterface
     /**
      * Sets device types Mappings
      *
-     * @param $deviceTypeMappings
+     * @param array $deviceTypeMappings
      *
      * @return MappingBagInterface
      */
-    public function setDeviceType($deviceTypeMappings)
+    public function setDeviceType(array $deviceTypeMappings)
     {
         $this->deviceTypeMappings = $deviceTypeMappings;
         return $this;
@@ -78,11 +103,11 @@ class MappingBag implements MappingBagInterface
     /**
      * Set Os short names Mappings
      *
-     * @param $osShortMappings
+     * @param array $osShortMappings
      *
      * @return MappingBagInterface
      */
-    public function setOsShort($osShortMappings)
+    public function setOsShort(array $osShortMappings)
     {
         $this->osShortMappings = $osShortMappings;
         return $this;
@@ -91,11 +116,11 @@ class MappingBag implements MappingBagInterface
     /**
      * Sets desktop Os names Mappings
      *
-     * @param $desktopOsMappings
+     * @param array $desktopOsMappings
      *
      * @return MappingBagInterface
      */
-    public function setDesktopOs($desktopOsMappings)
+    public function setDesktopOs(array $desktopOsMappings)
     {
         $this->desktopOsMappings = $desktopOsMappings;
         return $this;
@@ -104,11 +129,11 @@ class MappingBag implements MappingBagInterface
     /**
      * sets Os family names Mappings
      *
-     * @param $osFamilyMappings
+     * @param array $osFamilyMappings
      *
      * @return MappingBagInterface
      */
-    public function setOsFamily($osFamilyMappings)
+    public function setOsFamily(array $osFamilyMappings)
     {
         $this->osFamilyMappings = $osFamilyMappings;
         return $this;

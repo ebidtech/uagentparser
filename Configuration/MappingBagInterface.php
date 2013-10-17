@@ -16,65 +16,65 @@ interface MappingBagInterface
     /**
      * Sets browser mappings
      *
-     * @param $browserMappings
+     * @param array $browserMappings
      *
      * @return MappingBagInterface
      */
-    public function setBrowser($browserMappings);
+    public function setBrowser(array $browserMappings);
 
     /**
      * Set browser family mappings
      *
-     * @param $browserFamilyMappings
+     * @param array $browserFamilyMappings
      *
      * @return MappingBagInterface
      */
-    public function setBrowserFamily($browserFamilyMappings);
+    public function setBrowserFamily(array $browserFamilyMappings);
 
     /**
      * sets device brands mappings
      *
-     * @param $deviceBrands
+     * @param array $deviceBrands
      *
      * @return MappingBagInterface
      */
-    public function setDeviceBrand($deviceBrands);
+    public function setDeviceBrand(array $deviceBrands);
 
     /**
      * Sets device types mappings
      *
-     * @param $deviceTypes
+     * @param array $deviceTypes
      *
      * @return MappingBagInterface
      */
-    public function setDeviceType($deviceTypes);
+    public function setDeviceType(array $deviceTypes);
 
     /**
      * Set Os short names mappings
      *
-     * @param $osShorts
+     * @param array $osShorts
      *
      * @return MappingBagInterface
      */
-    public function setOsShort($osShorts);
+    public function setOsShort(array $osShorts);
 
     /**
      * Sets desktop Os names mappings
      *
-     * @param $desktopOs
+     * @param array $desktopOs
      *
      * @return MappingBagInterface
      */
-    public function setDesktopOs($desktopOs);
+    public function setDesktopOs(array $desktopOs);
 
     /**
      * sets Os family names mappings
      *
-     * @param $osFamilies
+     * @param array $osFamilies
      *
      * @return MappingBagInterface
      */
-    public function setOsFamily($osFamilies);
+    public function setOsFamily(array $osFamilies);
 
     /**
      * Gets all browser mappings
