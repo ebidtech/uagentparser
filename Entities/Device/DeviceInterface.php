@@ -16,15 +16,11 @@ use EBT\UAgentParser\Entities\Device\Type\TypeInterface;
 
 /**
  * Interface DeviceInterface
- *
- * @package EBT\Entities
  */
 interface DeviceInterface extends EntityInterface
 {
     /**
      * @return BrandInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getBrand();
 
@@ -37,8 +33,6 @@ interface DeviceInterface extends EntityInterface
 
     /**
      * @return TypeInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getType();
 

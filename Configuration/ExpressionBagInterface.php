@@ -37,27 +37,27 @@ interface ExpressionBagInterface
     /**
      * Set browser expressions
      *
-     * @param $browserExpressions
+     * @param array $browserExpressions
      *
      * @return ExpressionBagInterface
      */
-    public function setBrowser($browserExpressions);
+    public function setBrowser(array $browserExpressions);
 
     /**
      * Set mobile expressions
      *
-     * @param $mobileExpressions
+     * @param array $mobileExpressions
      *
      * @return ExpressionBagInterface
      */
-    public function setMobile($mobileExpressions);
+    public function setMobile(array $mobileExpressions);
 
     /**
      * Set Os expressions
      *
-     * @param $osExpressions
+     * @param array $osExpressions
      *
      * @return ExpressionBagInterface
      */
-    public function setOs($osExpressions);
+    public function setOs(array $osExpressions);
 }

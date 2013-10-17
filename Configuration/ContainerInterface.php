@@ -11,8 +11,6 @@
 
 namespace EBT\UAgentParser\Configuration;
 
-use EBT\UAgentParser\Configuration\ExpressionBagInterface;
-
 interface ContainerInterface
 {
     /**
@@ -46,4 +44,20 @@ interface ContainerInterface
      * @return ContainerInterface
      */
     public function setDefinitions(DefinitionBagInterface $definitions);
+
+    /**
+     * Gets all mappings
+     *
+     * @return MappingBagInterface
+     */
+    public function getMappings();
+
+    /**
+     * Sets all the mappings
+     *
+     * @param MappingBagInterface $mappings
+     *
+     * @return ContainerInterface
+     */
+    public function setMappings(MappingBagInterface $mappings);
 }

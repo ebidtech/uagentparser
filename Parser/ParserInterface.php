@@ -13,8 +13,6 @@ namespace EBT\UAgentParser\Parser;
 
 /**
  * Class ParserInterface
- *
- * @package EBT\Parser
  */
 interface ParserInterface
 {

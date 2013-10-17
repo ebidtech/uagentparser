@@ -16,8 +16,6 @@ use EBT\UAgentParser\Entities\Device\Type\TypeInterface;
 
 /**
  * Class Device
- *
- * @package EBT\Entities
  */
 class Device extends Entity implements DeviceInterface
 {
@@ -33,8 +31,6 @@ class Device extends Entity implements DeviceInterface
 
     /**
      * @return BrandInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getBrand()
     {
@@ -54,8 +50,6 @@ class Device extends Entity implements DeviceInterface
 
     /**
      * @return TypeInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getType()
     {

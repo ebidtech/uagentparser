@@ -15,8 +15,6 @@ use EBT\UAgentParser\Configuration\ContainerInterface as ConfContainer;
 
 /**
  * Class Parser
- *
- * @package EBT\Parser
  */
 class Parser implements ParserInterface
 {
@@ -324,7 +322,9 @@ class Parser implements ParserInterface
      */
     public function isDesktop()
     {
+        $decodedFamily = '';
         $osName = $this->getOs('name');
+
         if (empty($osName) || empty($this->osShorts[$osName])) {
             return false;
         }
@@ -371,7 +371,7 @@ class Parser implements ParserInterface
     /**
      * Checks if the device type name exists in the configuration
      *
-     * @param $name name to check
+     * @param string $name Name to check
      *
      * @return bool
      */
@@ -393,7 +393,7 @@ class Parser implements ParserInterface
     /**
      * Checks if the device brand name exists in the configuration
      *
-     * @param $name name to check
+     * @param string $name Name to check
      *
      * @return bool
      */
@@ -415,7 +415,7 @@ class Parser implements ParserInterface
     /**
      * Checks if the OS Short name exists in the configuration
      *
-     * @param $name name to check
+     * @param string $name Name to check
      *
      * @return bool
      */
@@ -437,7 +437,7 @@ class Parser implements ParserInterface
     /**
      * Checks if the Os Family name exists in the configuration
      *
-     * @param $name name to check
+     * @param string $name Name to check
      *
      * @return bool
      */
@@ -459,7 +459,7 @@ class Parser implements ParserInterface
     /**
      * Checks if the Desktop Os name exists in the configuration
      *
-     * @param $name name to check
+     * @param string $name Name to check
      *
      * @return bool
      */
@@ -481,7 +481,7 @@ class Parser implements ParserInterface
     /**
      * Checks if the Browser Family name exists in the configuration
      *
-     * @param $name name to check
+     * @param string $name Name to check
      *
      * @return bool
      */
@@ -503,7 +503,7 @@ class Parser implements ParserInterface
     /**
      * Checks if the Browser Family name exists in the configuration
      *
-     * @param $name name to check
+     * @param string $name Name to check
      *
      * @return bool
      */
@@ -517,6 +517,8 @@ class Parser implements ParserInterface
      */
     protected function parseOs()
     {
+        $matches = false;
+
         foreach ($this->getOsRegexes() as $osRegex) {
             $matches = $this->matchUserAgent($osRegex['regex']);
             if ($matches) {
@@ -547,6 +549,8 @@ class Parser implements ParserInterface
 
     protected function parseBrowser()
     {
+        $matches = false;
+
         foreach ($this->getBrowserRegexes() as $browserRegex) {
             $matches = $this->matchUserAgent($browserRegex['regex']);
             if ($matches) {
@@ -580,6 +584,8 @@ class Parser implements ParserInterface
 
     protected function parseBrand($mobileRegexes)
     {
+        $matches = false;
+
         foreach ($mobileRegexes as $brand => $mobileRegex) {
             $matches = $this->matchUserAgent($mobileRegex['regex']);
             if ($matches) {
@@ -605,6 +611,8 @@ class Parser implements ParserInterface
 
     protected function parseModel($mobileRegexes)
     {
+        $matches = false;
+
         if (empty($this->brand) || !empty($this->modelName)) {
             return;
         }
@@ -747,6 +755,7 @@ class Parser implements ParserInterface
         }
 
         $replace = isset($matches[$nb]) ? $matches[$nb] : '';
+
         return trim(str_replace('$' . $nb, $replace, $item));
     }
 }

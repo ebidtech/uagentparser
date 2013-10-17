@@ -15,15 +15,11 @@ use EBT\UAgentParser\Entities\Browser\Family\FamilyInterface;
 
 /**
  * Interface BrowserInterface
- *
- * @package EBT\Entities
  */
 interface BrowserInterface extends EntityInterface
 {
     /**
      * @return FamilyInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getFamily();
 

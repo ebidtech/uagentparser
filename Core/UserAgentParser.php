@@ -29,7 +29,6 @@ use EBT\UAgentParser\Entities\Os\OsInterface;
 use EBT\UAgentParser\Entities\Browser\Family\Family as BrowserFamily;
 use EBT\UAgentParser\Entities\Os\Family\Family as OsFamily;
 use EBT\UAgentParser\Entities\Device\Brand\Brand as DeviceBrand;
-
 use EBT\UAgentParser\Entities\Device\Type\Type as DeviceType;
 
 /**
@@ -45,7 +44,6 @@ class UserAgentParser implements UserAgentParserInterface
     const MAP_NAME_OS_FAMILY = 'os_family';
     const MAP_NAME_OS_SHORT = 'os_short';
     const USER_AGENT_STRING_MIN_LENGTH = 10;
-
 
     /**
      * @var ConfContainer
@@ -77,10 +75,20 @@ class UserAgentParser implements UserAgentParserInterface
      */
     protected $os;
 
+    /**
+     * @var bool
+     */
     protected $rebuildBrowser = true;
-    protected $rebuildDevice = true;
-    protected $rebuildOs = true;
 
+    /**
+     * @var bool
+     */
+    protected $rebuildDevice = true;
+
+    /**
+     * @var bool
+     */
+    protected $rebuildOs = true;
 
     /**
      * Constructor
@@ -142,9 +150,7 @@ class UserAgentParser implements UserAgentParserInterface
     {
         if ($userAgent != $this->parser->getUserAgent()) {
             $this->parser->setUserAgent($userAgent);
-            $this->rebuildBrowser = true;
-            $this->rebuildDevice = true;
-            $this->rebuildOs = true;
+            $this->rebuildBrowser = $this->rebuildDevice = $this->rebuildOs = true;
         }
         return $this;
     }
@@ -153,7 +159,8 @@ class UserAgentParser implements UserAgentParserInterface
      * Returns Browser
      *
      * @return BrowserInterface
-     * @throws \EBT\UAgentParser\Exception\InvalidUserAgentStrException
+     *
+     * @throws InvalidUserAgentStrException
      */
     public function getBrowser()
     {
@@ -162,6 +169,7 @@ class UserAgentParser implements UserAgentParserInterface
         ) {
             throw new InvalidUserAgentStrException();
         }
+
         if ($this->rebuildBrowser) {
             $shortName = self::getFromArray($this->parser->getBrowser(), 'short_name');
             $this->browser
@@ -176,6 +184,7 @@ class UserAgentParser implements UserAgentParserInterface
             $this->browser->setFamily($bFam);
             $this->rebuildBrowser = false;
         }
+
         return $this->browser;
     }
 
@@ -183,7 +192,7 @@ class UserAgentParser implements UserAgentParserInterface
      * Returns Device
      *
      * @return DeviceInterface
-     * @throws \EBT\UAgentParser\Exception\InvalidUserAgentStrException
+     * @throws InvalidUserAgentStrException
      */
     public function getDevice()
     {
@@ -192,6 +201,7 @@ class UserAgentParser implements UserAgentParserInterface
         ) {
             throw new InvalidUserAgentStrException();
         }
+
         if ($this->rebuildDevice) {
             $dBrand = new DeviceBrand();
             $dType = new DeviceType();
@@ -228,7 +238,7 @@ class UserAgentParser implements UserAgentParserInterface
      * Returns Os
      *
      * @return OsInterface
-     * @throws \EBT\UAgentParser\Exception\InvalidUserAgentStrException
+     * @throws InvalidUserAgentStrException
      */
     public function getOs()
     {
@@ -237,6 +247,7 @@ class UserAgentParser implements UserAgentParserInterface
         ) {
             throw new InvalidUserAgentStrException();
         }
+
         if ($this->rebuildOs) {
             $name = self::getFromArray($this->parser->getOs(), 'name');
             $shortName = self::getFromArray($this->parser->getOs(), 'short_name');
@@ -252,6 +263,7 @@ class UserAgentParser implements UserAgentParserInterface
             $this->os->setFamily($oFam);
             $this->rebuildOs = false;
         }
+
         return $this->os;
     }
 

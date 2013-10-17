@@ -16,65 +16,65 @@ interface DefinitionBagInterface
     /**
      * Sets browser definitions
      *
-     * @param $browserDefinitions
+     * @param array $browserDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setBrowser($browserDefinitions);
+    public function setBrowser(array $browserDefinitions);
 
     /**
      * Set browser family definitions
      *
-     * @param $browserFamilyDefinitions
+     * @param array $browserFamilyDefinitions
      *
      * @return DefinitionBagInterface
      */
-    public function setBrowserFamily($browserFamilyDefinitions);
+    public function setBrowserFamily(array $browserFamilyDefinitions);
 
     /**
      * sets device brands definitions
      *
-     * @param $deviceBrands
+     * @param array $deviceBrands
      *
      * @return DefinitionBagInterface
      */
-    public function setDeviceBrand($deviceBrands);
+    public function setDeviceBrand(array $deviceBrands);
 
     /**
      * Sets device types definitions
      *
-     * @param $deviceTypes
+     * @param array $deviceTypes
      *
      * @return DefinitionBagInterface
      */
-    public function setDeviceType($deviceTypes);
+    public function setDeviceType(array $deviceTypes);
 
     /**
      * Set Os short names definitions
      *
-     * @param $osShorts
+     * @param array $osShorts
      *
      * @return DefinitionBagInterface
      */
-    public function setOsShort($osShorts);
+    public function setOsShort(array $osShorts);
 
     /**
      * Sets desktop Os names definitions
      *
-     * @param $desktopOs
+     * @param array $desktopOs
      *
      * @return DefinitionBagInterface
      */
-    public function setDesktopOs($desktopOs);
+    public function setDesktopOs(array $desktopOs);
 
     /**
      * sets Os family names definitions
      *
-     * @param $osFamilies
+     * @param array $osFamilies
      *
      * @return DefinitionBagInterface
      */
-    public function setOsFamily($osFamilies);
+    public function setOsFamily(array $osFamilies);
 
     /**
      * Gets all browser definitions

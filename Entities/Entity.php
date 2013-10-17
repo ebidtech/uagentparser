@@ -12,13 +12,22 @@ namespace EBT\UAgentParser\Entities;
 
 /**
  * Class Entity
- *
- * @package EBT\Entities
  */
 abstract class Entity implements EntityInterface
 {
+    /**
+     * @var int
+     */
     protected $id;
+
+    /**
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @var string
+     */
     protected $nameShort;
 
     /**
