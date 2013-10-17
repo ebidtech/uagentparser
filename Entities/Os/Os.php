@@ -39,6 +39,7 @@ class Os extends Entity implements OsInterface
     public function setFamily(FamilyInterface $family)
     {
         $this->family = $family;
+
         return $this;
     }
 }

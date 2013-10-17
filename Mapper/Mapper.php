@@ -29,11 +29,6 @@ class Mapper implements MapperInterface
     }
 
     /**
-     * @var ConfContainer
-     */
-    protected $confContainer;
-
-    /**
      * Gets the destination data for specified source
      *
      * @param      $source
@@ -101,7 +96,7 @@ class Mapper implements MapperInterface
      * @param      $source
      * @param null $mapName
      *
-     * @return Object
+     * @return object
      */
     public function getToInMap($source, $mapName)
     {
@@ -114,7 +109,7 @@ class Mapper implements MapperInterface
      * @param      $destination
      * @param null $mapName
      *
-     * @return Object
+     * @return object
      */
     public function getFromInMap($destination, $mapName)
     {
@@ -128,8 +123,6 @@ class Mapper implements MapperInterface
      * @param array  $mappingTable
      *
      * @return MapperInterface
-     *
-     * @throws \InvalidArgumentException
      */
     public function setMap($mapName, array $mappingTable)
     {
@@ -141,7 +134,7 @@ class Mapper implements MapperInterface
      *
      * @param string $mapName
      *
-     * @return Array
+     * @return array
      */
     public function getMap($mapName)
     {
@@ -165,7 +158,8 @@ class Mapper implements MapperInterface
      * @param $key
      *
      * @return mixed
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
+     *
+     * @throws ResourceNotFoundException
      */
     protected function searchMap($mapName, $key)
     {
@@ -175,6 +169,7 @@ class Mapper implements MapperInterface
         if (!array_key_exists($key, $this->maps[$mapName])) {
             throw new ResourceNotFoundException(sprintf('Key %s was not found in %s.', $key, $mapName));
         }
+
         return $this->maps[$mapName][$key];
     }
 
@@ -185,6 +180,7 @@ class Mapper implements MapperInterface
      * @param mixed $value
      *
      * @return mixed
+     *
      * @throws ResourceNotFoundException
      */
     protected function reverseMap($mapName, $value)
@@ -196,6 +192,7 @@ class Mapper implements MapperInterface
         if (!$key) {
             throw new ResourceNotFoundException(sprintf('Value %s was not found in %s.', $value, $mapName));
         }
+
         return $key;
     }
 }

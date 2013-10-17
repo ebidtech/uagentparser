@@ -12,7 +12,6 @@ namespace EBT\UAgentParser\Entities\Browser;
 
 use EBT\UAgentParser\Entities\Entity;
 use EBT\UAgentParser\Entities\Browser\Family\FamilyInterface;
-use EBT\UAgentParser\Entities\Os\OsInterface;
 
 /**
  * Class Browser
@@ -35,11 +34,12 @@ class Browser extends Entity implements BrowserInterface
     /**
      * @param FamilyInterface $family
      *
-     * @return OsInterface
+     * @return BrowserInterface
      */
     public function setFamily(FamilyInterface $family)
     {
         $this->family = $family;
+
         return $this;
     }
 }

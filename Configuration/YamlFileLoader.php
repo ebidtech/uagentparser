@@ -38,7 +38,7 @@ class YamlFileLoader extends FileLoader
      * @param mixed  $file The resource
      * @param string $type The resource type
      *
-     * @return array The YAML converted to a PHP array
+     * @return array|null The YAML converted to a PHP array
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
@@ -46,12 +46,15 @@ class YamlFileLoader extends FileLoader
     {
         $path = $this->locator->locate($file);
         $content = Yaml::parse($path);
+
         // empty file
         if (null === $content) {
-            return;
+            return null;
         }
+
         // imports
         $this->parseImports($content, $file);
+
         return $content;
     }
 
