@@ -11,8 +11,6 @@
 
 namespace EBT\UAgentParser\Configuration;
 
-use EBT\UAgentParser\Configuration\DefinitionBagInterface;
-
 class DefinitionBag implements DefinitionBagInterface
 {
     protected $browserDefinitions;

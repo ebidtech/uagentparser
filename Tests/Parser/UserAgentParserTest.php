@@ -21,8 +21,7 @@ use EBT\UAgentParser\Parser\Parser;
 /**
  * Class UserAgentParserTest
  *
- * @group   unit
- * @package EBT\Tests\Unit
+ * @group unit
  */
 class UserAgentParserTest extends PHPUnit_Framework_TestCase
 {

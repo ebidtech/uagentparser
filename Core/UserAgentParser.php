@@ -77,10 +77,20 @@ class UserAgentParser implements UserAgentParserInterface
      */
     protected $os;
 
+    /**
+     * @var bool
+     */
     protected $rebuildBrowser = true;
-    protected $rebuildDevice = true;
-    protected $rebuildOs = true;
 
+    /**
+     * @var bool
+     */
+    protected $rebuildDevice = true;
+
+    /**
+     * @var bool
+     */
+    protected $rebuildOs = true;
 
     /**
      * Constructor

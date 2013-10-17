@@ -21,8 +21,7 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 /**
  * Class MapperTest
  *
- * @group   unit
- * @package EBT\Tests\Unit
+ * @group unit
  */
 class MapperTest extends PHPUnit_Framework_TestCase
 {

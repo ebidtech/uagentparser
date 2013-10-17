@@ -13,10 +13,8 @@ namespace EBT\UAgentParser\Entities\Os;
 use EBT\UAgentParser\Entities\Os\Family\FamilyInterface;
 use EBT\UAgentParser\Entities\Entity;
 
-    /**
+/**
  * Class Operating System
- *
- * @package EBT\Entities
  */
 class Os extends Entity implements OsInterface
 {
@@ -27,8 +25,6 @@ class Os extends Entity implements OsInterface
 
     /**
      * @return FamilyInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getFamily()
     {

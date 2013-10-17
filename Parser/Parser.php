@@ -15,8 +15,6 @@ use EBT\UAgentParser\Configuration\ContainerInterface as ConfContainer;
 
 /**
  * Class Parser
- *
- * @package EBT\Parser
  */
 class Parser implements ParserInterface
 {

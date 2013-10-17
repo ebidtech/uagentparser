@@ -11,11 +11,8 @@
 
 namespace EBT\UAgentParser\Mapper;
 
-
 /**
  * Class MapperInterface
- *
- * @package EBT\Mapper
  */
 interface MapperInterface
 {
@@ -60,12 +57,12 @@ interface MapperInterface
     /**
      * Sets a map
      *
-     * @param $mapName
-     * @param $mappingTable
+     * @param string $mapName
+     * @param array $mappingTable
      *
      * @return MapperInterface
      */
-    public function setMap($mapName, $mappingTable);
+    public function setMap($mapName, array $mappingTable);
 
     /**
      * Gets a specified map

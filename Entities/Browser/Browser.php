@@ -12,11 +12,10 @@ namespace EBT\UAgentParser\Entities\Browser;
 
 use EBT\UAgentParser\Entities\Entity;
 use EBT\UAgentParser\Entities\Browser\Family\FamilyInterface;
+use EBT\UAgentParser\Entities\Os\OsInterface;
 
 /**
  * Class Browser
- *
- * @package EBT\Entities
  */
 class Browser extends Entity implements BrowserInterface
 {
@@ -27,8 +26,6 @@ class Browser extends Entity implements BrowserInterface
 
     /**
      * @return FamilyInterface
-     *
-     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException
      */
     public function getFamily()
     {

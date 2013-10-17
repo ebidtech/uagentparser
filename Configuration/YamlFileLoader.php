@@ -39,6 +39,8 @@ class YamlFileLoader extends FileLoader
      * @param string $type The resource type
      *
      * @return array The YAML converted to a PHP array
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function load($file, $type = null)
     {
@@ -60,6 +62,8 @@ class YamlFileLoader extends FileLoader
      * @param string $type     The resource type
      *
      * @return Boolean true if this class supports the given resource, false otherwise
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function supports($resource, $type = null)
     {
@@ -86,66 +90,78 @@ class YamlFileLoader extends FileLoader
                 isset($import['ignore_errors']) ? (Boolean) $import['ignore_errors'] : false,
                 $file
             );
+
             // parameters
             if (isset($content['parameters'])) {
                 foreach ($content['parameters'] as $key => $value) {
-                    switch ($key) {
-                        case 'uap_expression_browser':
-                            $this->container->getExpressions()->setBrowser($value);
-                            break;
-                        case 'uap_expression_mobile':
-                            $this->container->getExpressions()->setMobile($value);
-                            break;
-                        case 'uap_expression_os':
-                            $this->container->getExpressions()->setOs($value);
-                            break;
-                        case 'uap_definition_browser':
-                            $this->container->getDefinitions()->setBrowser($value);
-                            break;
-                        case 'uap_definition_browser_family':
-                            $this->container->getDefinitions()->setBrowserFamily($value);
-                            break;
-                        case 'uap_definition_device_type':
-                            $this->container->getDefinitions()->setDeviceType($value);
-                            break;
-                        case 'uap_definition_device_brand':
-                            $this->container->getDefinitions()->setDeviceBrand($value);
-                            break;
-                        case 'uap_definition_os_family':
-                            $this->container->getDefinitions()->setOsFamily($value);
-                            break;
-                        case 'uap_definition_desktop_os':
-                            $this->container->getDefinitions()->setDesktopOs($value);
-                            break;
-                        case 'uap_definition_os_short':
-                            $this->container->getDefinitions()->setOsShort($value);
-                            break;
-                        case 'uap_mapping_browser':
-                            $this->container->getMappings()->setBrowser($value);
-                            break;
-                        case 'uap_mapping_browser_family':
-                            $this->container->getMappings()->setBrowserFamily($value);
-                            break;
-                        case 'uap_mapping_device_type':
-                            $this->container->getMappings()->setDeviceType($value);
-                            break;
-                        case 'uap_mapping_device_brand':
-                            $this->container->getMappings()->setDeviceBrand($value);
-                            break;
-                        case 'uap_mapping_os_family':
-                            $this->container->getMappings()->setOsFamily($value);
-                            break;
-                        case 'uap_mapping_desktop_os':
-                            $this->container->getMappings()->setDesktopOs($value);
-                            break;
-                        case 'uap_mapping_os_short':
-                            $this->container->getMappings()->setOsShort($value);
-                            break;
-                    }
+                    $this->setContainer($key, $value);
 
                 }
             }
 
+        }
+    }
+
+    /**
+     * @param string $key
+     * @param array $value
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
+    private function setContainer($key, array $value)
+    {
+        switch ($key) {
+            case 'uap_expression_browser':
+                $this->container->getExpressions()->setBrowser($value);
+                break;
+            case 'uap_expression_mobile':
+                $this->container->getExpressions()->setMobile($value);
+                break;
+            case 'uap_expression_os':
+                $this->container->getExpressions()->setOs($value);
+                break;
+            case 'uap_definition_browser':
+                $this->container->getDefinitions()->setBrowser($value);
+                break;
+            case 'uap_definition_browser_family':
+                $this->container->getDefinitions()->setBrowserFamily($value);
+                break;
+            case 'uap_definition_device_type':
+                $this->container->getDefinitions()->setDeviceType($value);
+                break;
+            case 'uap_definition_device_brand':
+                $this->container->getDefinitions()->setDeviceBrand($value);
+                break;
+            case 'uap_definition_os_family':
+                $this->container->getDefinitions()->setOsFamily($value);
+                break;
+            case 'uap_definition_desktop_os':
+                $this->container->getDefinitions()->setDesktopOs($value);
+                break;
+            case 'uap_definition_os_short':
+                $this->container->getDefinitions()->setOsShort($value);
+                break;
+            case 'uap_mapping_browser':
+                $this->container->getMappings()->setBrowser($value);
+                break;
+            case 'uap_mapping_browser_family':
+                $this->container->getMappings()->setBrowserFamily($value);
+                break;
+            case 'uap_mapping_device_type':
+                $this->container->getMappings()->setDeviceType($value);
+                break;
+            case 'uap_mapping_device_brand':
+                $this->container->getMappings()->setDeviceBrand($value);
+                break;
+            case 'uap_mapping_os_family':
+                $this->container->getMappings()->setOsFamily($value);
+                break;
+            case 'uap_mapping_desktop_os':
+                $this->container->getMappings()->setDesktopOs($value);
+                break;
+            case 'uap_mapping_os_short':
+                $this->container->getMappings()->setOsShort($value);
+                break;
         }
     }
 }
