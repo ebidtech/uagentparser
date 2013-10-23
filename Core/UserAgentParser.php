@@ -256,7 +256,6 @@ class UserAgentParser implements UserAgentParserInterface
                     $deviceBrandShort = $this->parser->getDeviceBrand();
                     $deviceBrandFull = $this->parser->getDeviceBrandFull();
                     $deviceBrandId = $this->mapper->getToInMap($deviceBrandShort, self::MAP_NAME_DEVICE_BRAND);
-
                 } catch (ResourceNotFoundException $exc) {
                     if ($throwExceptionIfNotFound) {
                         throw $exc;
@@ -280,6 +279,7 @@ class UserAgentParser implements UserAgentParserInterface
                     ->setName(self::USER_AGENT_NULL_STR_LONG)
                     ->setId(self::USER_AGENT_NULL_ID);
             }
+            /* DEVICE TYPE */
             try {
                 $deviceTypeShort = $this->parser->getDeviceType();
                 $deviceTypeFull = $this->parser->getDeviceTypeFullName();

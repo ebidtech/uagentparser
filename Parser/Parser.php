@@ -19,7 +19,7 @@ use EBT\UAgentParser\Exception\ResourceNotFoundException;
  */
 class Parser implements ParserInterface
 {
-    const DEFAULT_DEVICE_TYPE_FULL_DESKTOP = 'desktop';
+    const DEFAULT_DEVICE_TYPE_FULL = 'desktop';
     const DEFAULT_BOT_STR = 'Bot';
     const DEFAULT_SIMULATOR_STR = 'Simulator';
 
@@ -178,9 +178,13 @@ class Parser implements ParserInterface
      * Get Type
      *
      * @return string
+     * @throws ResourceNotFoundException
      */
     public function getDeviceType()
     {
+        if (false === $this->deviceType) {
+            throw new ResourceNotFoundException();
+        }
         return $this->deviceType;
     }
 
@@ -188,9 +192,13 @@ class Parser implements ParserInterface
      * Get Type full name
      *
      * @return string
+     * @throws ResourceNotFoundException
      */
     public function getDeviceTypeFullName()
     {
+        if (false === $this->deviceType) {
+            throw new ResourceNotFoundException();
+        }
         return $this->deviceTypeFull;
     }
 
@@ -282,8 +290,15 @@ class Parser implements ParserInterface
         if ($this->isMobile()) {
             $this->parseMobile();
         } else {
-            $this->deviceTypeFull = self::DEFAULT_DEVICE_TYPE_FULL_DESKTOP;
-            $this->deviceType = array_search($this->deviceTypeFull, $this->deviceTypes);
+            if (!is_array($this->os)) {
+                /* invalid OS means unknown device */
+                $this->deviceTypeFull = '';
+                $this->deviceType = false;
+            } else {
+                /* default device - desktop  */
+                $this->deviceTypeFull = self::DEFAULT_DEVICE_TYPE_FULL;
+                $this->deviceType = array_search($this->deviceTypeFull, $this->deviceTypes);
+            }
         }
         if ($this->debug) {
             var_dump($this->brand, $this->modelName, $this->deviceType);
@@ -298,10 +313,14 @@ class Parser implements ParserInterface
     public function isBot()
     {
         $decodedFamily = '';
-        if (array_key_exists($this->getOs('name'), $this->osShorts)) {
-            $osShort = $this->osShorts[$this->getOs('name')];
-        } else {
-            $osShort = '';
+        try {
+            if (array_key_exists($this->getOs('name'), $this->osShorts)) {
+                $osShort = $this->osShorts[$this->getOs('name')];
+            } else {
+                $osShort = '';
+            }
+        } catch (ResourceNotFoundException $exc) {
+            return false;
         }
         foreach ($this->osFamilies as $family => $familyOs) {
             if (in_array($osShort, $familyOs)) {
@@ -319,10 +338,14 @@ class Parser implements ParserInterface
     public function isSimulator()
     {
         $decodedFamily = '';
-        if (in_array($this->getOs('name'), $this->osShorts)) {
-            $osShort = $this->osShorts[$this->getOs('name')];
-        } else {
-            $osShort = '';
+        try {
+            if (in_array($this->getOs('name'), $this->osShorts)) {
+                $osShort = $this->osShorts[$this->getOs('name')];
+            } else {
+                $osShort = '';
+            }
+        } catch (ResourceNotFoundException $exc) {
+            return false;
         }
         foreach ($this->osFamilies as $family => $familyOs) {
             if (in_array($osShort, $familyOs)) {
@@ -338,16 +361,32 @@ class Parser implements ParserInterface
      */
     public function isMobile()
     {
-        return !$this->isDesktop();
+        try {
+            $isMobile = !$this->isDesktop(true);
+        } catch (ResourceNotFoundException $exc) {
+            return false;
+        }
+        return $isMobile;
     }
 
     /**
+     * @param bool $throwException
+     *
+     * @throws \EBT\UAgentParser\Exception\ResourceNotFoundException|\Exception
      * @return bool
+     *
      */
-    public function isDesktop()
+    public function isDesktop($throwException = false)
     {
         $decodedFamily = '';
-        $osName = $this->getOs('name');
+        try {
+            $osName = $this->getOs('name');
+        } catch (ResourceNotFoundException $exc) {
+            if ($throwException) {
+                throw $exc;
+            }
+            return false;
+        }
 
         if (empty($osName) || empty($this->osShorts[$osName])) {
             return false;

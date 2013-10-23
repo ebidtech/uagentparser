@@ -46,6 +46,7 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Safari', $uap->getBrowser()->getFamily()->getName());
         $this->assertEquals('Safari', $uap->getBrowser()->getFamily()->getNameShort());
         $this->assertEquals(10, $uap->getBrowser()->getFamily()->getId());
+
     }
 
     /**
@@ -127,7 +128,58 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('smartphone', $uap->getDevice()->getType()->getName());
         $this->assertEquals('smartphone', $uap->getDevice()->getType()->getNameShort());
         $this->assertEquals(2, $uap->getDevice()->getType()->getId());
+    }
 
+    /**
+     * Test Invalid Browser related methods
+     */
+    public function testInvalidBrowser()
+    {
+        $uaStr = 'Python-urllib/2.7';
+        $uap = new UserAgentParser($uaStr);
+        $this->assertEquals('Unknown', $uap->getBrowser()->getName());
+        $this->assertEquals('UNK', $uap->getBrowser()->getNameShort());
+        $this->assertEquals(1, $uap->getBrowser()->getId());
+        $this->assertEquals('Unknown', $uap->getBrowser()->getFamily()->getName());
+        $this->assertEquals('UNK', $uap->getBrowser()->getFamily()->getNameShort());
+        $this->assertEquals(1, $uap->getBrowser()->getFamily()->getId());
+    }
 
+    /**
+     * Test Invalid OS related methods
+     *
+     */
+    public function testInvalidOs()
+    {
+        $uaStr = 'Python-urllib/2.7';
+        $uap = new UserAgentParser($uaStr);
+        $this->assertEquals('Unknown', $uap->getOs()->getName());
+        $this->assertEquals('UNK', $uap->getOs()->getNameShort());
+        $this->assertEquals(1, $uap->getOs()->getId());
+        $this->assertEquals('Unknown', $uap->getOs()->getFamily()->getName());
+        $this->assertEquals('UNK', $uap->getOs()->getFamily()->getNameShort());
+        $this->assertEquals(1, $uap->getOs()->getFamily()->getId());
+    }
+
+    /**
+     * Test Invalid Device related methods
+     */
+    public function testInvalidDevice()
+    {
+        $uaStr = 'Python-urllib/2.7';
+        $uap = new UserAgentParser($uaStr);
+        $this->assertEquals('Not Available', $uap->getDevice()->getName());
+        $this->assertEquals(
+            'NA',
+            $uap->getDevice()->getNameShort(),
+            'Testing ' . $uaStr . ' returns NA device'
+        );
+        $this->assertEquals(0, $uap->getDevice()->getId());
+        $this->assertEquals('Not Available', $uap->getDevice()->getBrand()->getName());
+        $this->assertEquals('NA', $uap->getDevice()->getBrand()->getNameShort());
+        $this->assertEquals(0, $uap->getDevice()->getBrand()->getId());
+        $this->assertEquals('Unknown', $uap->getDevice()->getType()->getName());
+        $this->assertEquals('UNK', $uap->getDevice()->getType()->getNameShort());
+        $this->assertEquals(1, $uap->getDevice()->getType()->getId());
     }
 }
