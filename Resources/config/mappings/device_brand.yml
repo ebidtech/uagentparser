@@ -1,7 +1,7 @@
 parameters:
     uap_mapping_device_brand:
-        NA: 0
-        AC: 1
+        # 0 is reserved for Null or Not Available
+        # 1 is reserved for Unknown
         AI: 2
         AL: 3
         AO: 4
@@ -106,3 +106,4 @@ parameters:
         XX: 103
         ZO: 104
         ZT: 105
+        AC: 106

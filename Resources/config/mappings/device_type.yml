@@ -1,9 +1,11 @@
 parameters:
     uap_mapping_device_type:
-        desktop: 1
+        # 0 is reserved for Null or Not Available
+        # 1 is reserved for Unknown
         smartphone: 2
         tablet: 3
         feature phone: 4
         console: 5
         tv: 6
         car browser: 7
+        desktop: 8

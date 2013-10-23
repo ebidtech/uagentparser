@@ -84,22 +84,26 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
         $uaStr = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) ';
         $uaStr .= 'Chrome/29.0.1547.76 Safari/537.36';
         $uap = new UserAgentParser($uaStr);
-        $this->assertEquals('NA', $uap->getDevice()->getName());
-        $this->assertEquals('NA', $uap->getDevice()->getNameShort());
+        $this->assertEquals('Not Available', $uap->getDevice()->getName());
+        $this->assertEquals(
+            'NA',
+            $uap->getDevice()->getNameShort(),
+            'Testing Linux returns NA device'
+        );
         $this->assertEquals(0, $uap->getDevice()->getId());
-        $this->assertEquals('NA', $uap->getDevice()->getBrand()->getName());
+        $this->assertEquals('Not Available', $uap->getDevice()->getBrand()->getName());
         $this->assertEquals('NA', $uap->getDevice()->getBrand()->getNameShort());
         $this->assertEquals(0, $uap->getDevice()->getBrand()->getId());
         $this->assertEquals('desktop', $uap->getDevice()->getType()->getName());
         $this->assertEquals('desktop', $uap->getDevice()->getType()->getNameShort());
-        $this->assertEquals(1, $uap->getDevice()->getType()->getId());
+        $this->assertEquals(8, $uap->getDevice()->getType()->getId());
 
         $uaStr = 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 ';
         $uaStr .= '(KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3';
         $uap = new UserAgentParser($uaStr);
         $this->assertEquals('iPhone', $uap->getDevice()->getName());
-        $this->assertEquals('NA', $uap->getDevice()->getNameShort());
-        $this->assertEquals(0, $uap->getDevice()->getId());
+        $this->assertEquals('UNK', $uap->getDevice()->getNameShort());
+        $this->assertEquals(1, $uap->getDevice()->getId());
         $this->assertEquals('Apple', $uap->getDevice()->getBrand()->getName());
         $this->assertEquals('AP', $uap->getDevice()->getBrand()->getNameShort());
         $this->assertEquals(5, $uap->getDevice()->getBrand()->getId());
@@ -111,8 +115,12 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
         $uaStr .='AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30';
         $uap = new UserAgentParser($uaStr);
         $this->assertEquals('GT-I9300', $uap->getDevice()->getName());
-        $this->assertEquals('NA', $uap->getDevice()->getNameShort());
-        $this->assertEquals(0, $uap->getDevice()->getId());
+        $this->assertEquals(
+            'UNK',
+            $uap->getDevice()->getNameShort(),
+            'Testing Android returns Unknown device because model is not implemented yet '
+        );
+        $this->assertEquals(1, $uap->getDevice()->getId(), 'Testing Android');
         $this->assertEquals('Samsung', $uap->getDevice()->getBrand()->getName());
         $this->assertEquals('SA', $uap->getDevice()->getBrand()->getNameShort());
         $this->assertEquals(75, $uap->getDevice()->getBrand()->getId());

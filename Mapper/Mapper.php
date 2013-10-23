@@ -62,7 +62,7 @@ class Mapper implements MapperInterface
     /**
      * Gets the source data for specified destination
      *
-     * @param      $destination
+     * @param string $destination
      *
      * @return array
      *
@@ -84,7 +84,7 @@ class Mapper implements MapperInterface
         }
 
         if ($results == array()) {
-            throw new ResourceNotFoundException('Destination %s was not found in any map.');
+            throw new ResourceNotFoundException(sprintf('Destination %s was not found in any map.', $destination));
         }
 
         return $results;

@@ -20,6 +20,7 @@ use EBT\UAgentParser\Parser\Parser;
 use EBT\UAgentParser\Configuration\Container as ConfContainer;
 use EBT\UAgentParser\Mapper\Mapper;
 use EBT\UAgentParser\Configuration\YamlFileLoader;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -44,6 +45,12 @@ class UserAgentParser implements UserAgentParserInterface
     const MAP_NAME_OS_FAMILY = 'os_family';
     const MAP_NAME_OS_SHORT = 'os_short';
     const USER_AGENT_STRING_MIN_LENGTH = 10;
+    const USER_AGENT_NULL_ID = 0;
+    const USER_AGENT_NULL_STR = 'NA';
+    const USER_AGENT_NULL_STR_LONG = 'Not Available';
+    const USER_AGENT_UNKNOWN_ID = 1;
+    const USER_AGENT_UNKNOWN_STR = 'UNK';
+    const USER_AGENT_UNKNOWN_STR_LONG = 'Unknown';
 
     /**
      * @var ConfContainer
@@ -158,11 +165,15 @@ class UserAgentParser implements UserAgentParserInterface
     /**
      * Returns Browser
      *
-     * @return BrowserInterface
+     * @param bool $throwExceptionIfNotFound
      *
      * @throws InvalidUserAgentStrException
+     * @throws ResourceNotFoundException
+     *
+     * @return BrowserInterface
+     *
      */
-    public function getBrowser()
+    public function getBrowser($throwExceptionIfNotFound = false)
     {
         if (is_null($this->parser->getUserAgent()) ||
             strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
@@ -171,16 +182,44 @@ class UserAgentParser implements UserAgentParserInterface
         }
 
         if ($this->rebuildBrowser) {
-            $shortName = self::getFromArray($this->parser->getBrowser(), 'short_name');
+            try {
+                $browserStruct = $this->parser->getBrowser();
+                $browserShortName = self::getFromArray($browserStruct, 'short_name');
+                $browserName = self::getFromArray($browserStruct, 'name');
+                $browserId = $this->mapper->getToInMap($browserShortName, self::MAP_NAME_BROWSER);
+            } catch (ResourceNotFoundException $exc) {
+                if ($throwExceptionIfNotFound) {
+                    throw $exc;
+                } else {
+                    $browserShortName = self::USER_AGENT_UNKNOWN_STR;
+                    $browserName = self::USER_AGENT_UNKNOWN_STR_LONG;
+                    $browserId = self::USER_AGENT_UNKNOWN_ID;
+                }
+            }
+
             $this->browser
-                ->setNameShort($shortName)
-                ->setName(self::getFromArray($this->parser->getBrowser(), 'name'))
-                ->setId($this->mapper->getToInMap($shortName, self::MAP_NAME_BROWSER));
-            $famShortName = $this->parser->getBrowserFamily($shortName);
+                ->setNameShort($browserShortName)
+                ->setName($browserName)
+                ->setId($browserId);
+
+            try {
+                $famShortName = $famName = $this->parser->getBrowserFamily($browserShortName);
+                $famId = $this->mapper->getToInMap($famShortName, self::MAP_NAME_BROWSER_FAMILY);
+
+            } catch (ResourceNotFoundException $exc) {
+                if ($throwExceptionIfNotFound) {
+                    throw $exc;
+                } else {
+                    $famShortName = self::USER_AGENT_UNKNOWN_STR;
+                    $famName = self::USER_AGENT_UNKNOWN_STR_LONG;
+                    $famId = self::USER_AGENT_UNKNOWN_ID;
+                }
+            }
+            /* create browser family  */
             $bFam = new BrowserFamily();
             $bFam->setNameShort($famShortName)
-                ->setName($famShortName)
-                ->setId($this->mapper->getToInMap($famShortName, self::MAP_NAME_BROWSER_FAMILY));
+                ->setName($famName)
+                ->setId($famId);
             $this->browser->setFamily($bFam);
             $this->rebuildBrowser = false;
         }
@@ -191,10 +230,13 @@ class UserAgentParser implements UserAgentParserInterface
     /**
      * Returns Device
      *
-     * @return DeviceInterface
+     * @param bool $throwExceptionIfNotFound
+     *
      * @throws InvalidUserAgentStrException
+     * @throws ResourceNotFoundException
+     * @return DeviceInterface
      */
-    public function getDevice()
+    public function getDevice($throwExceptionIfNotFound = false)
     {
         if (is_null($this->parser->getUserAgent()) ||
             strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
@@ -207,25 +249,54 @@ class UserAgentParser implements UserAgentParserInterface
             $dType = new DeviceType();
             if ($this->parser->isMobile()) {
                 $this->device
-                    ->setNameShort('NA')/* TODO  - for now just working with raw device name */
+                    ->setNameShort(self::USER_AGENT_UNKNOWN_STR) /* TODO  - for now just working with raw device name */
                     ->setName($this->parser->getDeviceModelName())
-                    ->setId(0);
-                /* TODO */
-                $dBrand->setNameShort($this->parser->getDeviceBrand())
-                    ->setName($this->parser->getDeviceBrandFull())
-                    ->setId($this->mapper->getToInMap($this->parser->getDeviceBrand(), self::MAP_NAME_DEVICE_BRAND));
+                    ->setId(self::USER_AGENT_UNKNOWN_ID);
+                try {
+                    $deviceBrandShort = $this->parser->getDeviceBrand();
+                    $deviceBrandFull = $this->parser->getDeviceBrandFull();
+                    $deviceBrandId = $this->mapper->getToInMap($deviceBrandShort, self::MAP_NAME_DEVICE_BRAND);
+
+                } catch (ResourceNotFoundException $exc) {
+                    if ($throwExceptionIfNotFound) {
+                        throw $exc;
+                    } else {
+                        $deviceBrandShort = self::USER_AGENT_UNKNOWN_STR;
+                        $deviceBrandFull = self::USER_AGENT_UNKNOWN_STR_LONG;
+                        $deviceBrandId = self::USER_AGENT_UNKNOWN_ID;
+                    }
+                }
+                $dBrand->setNameShort($deviceBrandShort)
+                    ->setName($deviceBrandFull)
+                    ->setId($deviceBrandId);
+
             } else {
+                /* When this is not a device return NULL/Not Available */
                 $this->device
-                    ->setNameShort('NA')
-                    ->setName('NA')
-                    ->setId(0);
-                $dBrand->setNameShort('NA')
-                    ->setName('NA')
-                    ->setId(0);
+                    ->setNameShort(self::USER_AGENT_NULL_STR)
+                    ->setName(self::USER_AGENT_NULL_STR_LONG)
+                    ->setId(self::USER_AGENT_NULL_ID);
+                $dBrand->setNameShort(self::USER_AGENT_NULL_STR)
+                    ->setName(self::USER_AGENT_NULL_STR_LONG)
+                    ->setId(self::USER_AGENT_NULL_ID);
             }
-            $dType->setName($this->parser->getDeviceTypeFullName())
-                ->setNameShort($this->parser->getDeviceType())
-                ->setId($this->mapper->getToInMap($this->parser->getDeviceType(), self::MAP_NAME_DEVICE_TYPE));
+            try {
+                $deviceTypeShort = $this->parser->getDeviceType();
+                $deviceTypeFull = $this->parser->getDeviceTypeFullName();
+                $deviceTypedId = $this->mapper->getToInMap($deviceTypeShort, self::MAP_NAME_DEVICE_TYPE);
+
+            } catch (ResourceNotFoundException $exc) {
+                if ($throwExceptionIfNotFound) {
+                    throw $exc;
+                } else {
+                    $deviceTypeShort = self::USER_AGENT_UNKNOWN_STR;
+                    $deviceTypeFull = self::USER_AGENT_UNKNOWN_STR_LONG;
+                    $deviceTypedId = self::USER_AGENT_UNKNOWN_ID;
+                }
+            }
+            $dType->setName($deviceTypeFull)
+                ->setNameShort($deviceTypeShort)
+                ->setId($deviceTypedId);
             $this->device->setBrand($dBrand);
             $this->device->setType($dType);
             $this->rebuildDevice = false;
@@ -237,10 +308,13 @@ class UserAgentParser implements UserAgentParserInterface
     /**
      * Returns Os
      *
-     * @return OsInterface
+     * @param bool $throwExceptionIfNotFound
+     *
      * @throws InvalidUserAgentStrException
+     * @throws ResourceNotFoundException
+     * @return OsInterface
      */
-    public function getOs()
+    public function getOs($throwExceptionIfNotFound = false)
     {
         if (is_null($this->parser->getUserAgent()) ||
             strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
@@ -249,17 +323,41 @@ class UserAgentParser implements UserAgentParserInterface
         }
 
         if ($this->rebuildOs) {
-            $name = self::getFromArray($this->parser->getOs(), 'name');
-            $shortName = self::getFromArray($this->parser->getOs(), 'short_name');
+
+            try {
+                $osStruct = $this->parser->getOs();
+                $osName = self::getFromArray($osStruct, 'name');
+                $osShortName = self::getFromArray($osStruct, 'short_name');
+                $osId = $this->mapper->getToInMap($osName, self::MAP_NAME_OS_SHORT);
+            } catch (ResourceNotFoundException $exc) {
+                if ($throwExceptionIfNotFound) {
+                    throw $exc;
+                } else {
+                    $osShortName = self::USER_AGENT_UNKNOWN_STR;
+                    $osName = self::USER_AGENT_UNKNOWN_STR_LONG;
+                    $osId = self::USER_AGENT_UNKNOWN_ID;
+                }
+            }
             $this->os
-                ->setNameShort($shortName)
-                ->setName($name)
-                ->setId($this->mapper->getToInMap($name, self::MAP_NAME_OS_SHORT));
-            $famShortName = $this->parser->getOsFamily($shortName);
+                ->setNameShort($osShortName)
+                ->setName($osName)
+                ->setId($osId);
+            try {
+                $famShortName = $famName = $this->parser->getOsFamily($osShortName);
+                $famId = $this->mapper->getToInMap($famShortName, self::MAP_NAME_OS_FAMILY);
+            } catch (ResourceNotFoundException $exc) {
+                if ($throwExceptionIfNotFound) {
+                    throw $exc;
+                } else {
+                    $famShortName = self::USER_AGENT_UNKNOWN_STR;
+                    $famName = self::USER_AGENT_UNKNOWN_STR_LONG;
+                    $famId = self::USER_AGENT_UNKNOWN_ID;
+                }
+            }
             $oFam = new OsFamily();
             $oFam->setNameShort($famShortName)
-                ->setName($famShortName)
-                ->setId($this->mapper->getToInMap($famShortName, self::MAP_NAME_OS_FAMILY));
+                ->setName($famName)
+                ->setId($famId);
             $this->os->setFamily($oFam);
             $this->rebuildOs = false;
         }

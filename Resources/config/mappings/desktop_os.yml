@@ -1,7 +1,9 @@
 parameters:
     uap_mapping_desktop_os:
-        IBM: 1
+        # 0 is reserved for Null or Not Available
+        # 1 is reserved for Unknown
         Linux: 2
         Mac: 3
         Unix: 4
         Windows: 5
+        IBM: 6

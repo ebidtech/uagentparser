@@ -1,6 +1,7 @@
 parameters:
     uap_mapping_os_short:
-        AIX: 1
+        # 0 is reserved for Null or Not Available
+        # 1 is reserved for Unknown
         Android: 2
         Apple TV: 3
         Arch Linux: 4
@@ -76,3 +77,4 @@ parameters:
         iOS: 74
         palmOS: 75
         webOS: 76
+        AIX: 77

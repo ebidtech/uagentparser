@@ -12,18 +12,22 @@
 namespace EBT\UAgentParser\Parser;
 
 use EBT\UAgentParser\Configuration\ContainerInterface as ConfContainer;
+use EBT\UAgentParser\Exception\ResourceNotFoundException;
 
 /**
  * Class Parser
  */
 class Parser implements ParserInterface
 {
+    const DEFAULT_DEVICE_TYPE_FULL_DESKTOP = 'desktop';
+    const DEFAULT_BOT_STR = 'Bot';
+    const DEFAULT_SIMULATOR_STR = 'Simulator';
+
     /**
      * @var ConfContainer
      */
     protected $confContainer;
 
-    const UNKNOWN = "UNK";
     protected $userAgent;
     protected $os;
     protected $browser;
@@ -91,6 +95,8 @@ class Parser implements ParserInterface
     }
 
     /**
+     * Returns current user agent string
+     *
      * @return string
      */
     public function getUserAgent()
@@ -100,28 +106,36 @@ class Parser implements ParserInterface
 
     /* -------------------------------- BROWSER RELATED -------------------------------------- */
     /**
+     * Returns Browser structure or attribute
+     *
      * @param string $attr
      *
      * @return array|string
+     *
+     * @throws ResourceNotFoundException
      */
     public function getBrowser($attr = '')
     {
+        if (!is_array($this->browser)) {
+            throw new ResourceNotFoundException('Invalid internal browser structure.');
+        }
         if ($attr == '') {
             return $this->browser;
         }
-
         if (!isset($this->browser[$attr])) {
-            return self::UNKNOWN;
+            throw new ResourceNotFoundException(sprintf('Unable to find %s in browser structure.', $attr));
         }
 
         return $this->browser[$attr];
     }
 
-
     /**
+     * Returns browser family
+     *
      * @param $browserLabel
      *
-     * @return array|int|string
+     * @return string
+     * @throws ResourceNotFoundException
      */
     public function getBrowserFamily($browserLabel)
     {
@@ -131,7 +145,7 @@ class Parser implements ParserInterface
             }
         }
 
-        return 'Other';
+        throw new ResourceNotFoundException();
     }
 
     /* -------------------------------- DEVICE RELATED -------------------------------------- */
@@ -183,20 +197,24 @@ class Parser implements ParserInterface
     /* -------------------------------- OS RELATED -------------------------------------- */
 
     /**
+     * Get Os
+     *
      * @param string $attr
      *
      * @return array|string
+     * @throws ResourceNotFoundException
      */
     public function getOs($attr = '')
     {
+        if (!is_array($this->os)) {
+            throw new ResourceNotFoundException('Invalid internal Os structure.');
+        }
         if ($attr == '') {
             return $this->os;
         }
-
         if (!isset($this->os[$attr])) {
-            return self::UNKNOWN;
+            throw new ResourceNotFoundException(sprintf('Unable to find %s in Os structure.', $attr));
         }
-
         if ($attr == 'version') {
             $this->os['version'] = $this->os['version'];
         }
@@ -204,9 +222,12 @@ class Parser implements ParserInterface
     }
 
     /**
+     * Get Os Family
+     *
      * @param $osLabel
      *
-     * @return array|int|string
+     * @return string
+     * @throws ResourceNotFoundException
      */
     public function getOsFamily($osLabel)
     {
@@ -218,14 +239,17 @@ class Parser implements ParserInterface
             }
         }
 
-        return 'Other';
+        throw new ResourceNotFoundException();
     }
 
     /**
+     * Get Os Name From ID
+     *
      * @param      $os
      * @param bool $ver
      *
-     * @return array|bool|mixed|string
+     * @return string
+     * @throws ResourceNotFoundException
      */
     public function getOsNameFromId($os, $ver = false)
     {
@@ -258,7 +282,7 @@ class Parser implements ParserInterface
         if ($this->isMobile()) {
             $this->parseMobile();
         } else {
-            $this->deviceTypeFull = 'desktop';
+            $this->deviceTypeFull = self::DEFAULT_DEVICE_TYPE_FULL_DESKTOP;
             $this->deviceType = array_search($this->deviceTypeFull, $this->deviceTypes);
         }
         if ($this->debug) {
@@ -286,7 +310,7 @@ class Parser implements ParserInterface
             }
         }
 
-        return $decodedFamily == 'Bot';
+        return $decodedFamily == self::DEFAULT_BOT_STR;
     }
 
     /**
@@ -306,7 +330,7 @@ class Parser implements ParserInterface
                 break;
             }
         }
-        return $decodedFamily == 'Simulator';
+        return $decodedFamily == self::DEFAULT_SIMULATOR_STR;
     }
 
     /**
@@ -514,6 +538,8 @@ class Parser implements ParserInterface
 
     /**
      * Parse OS
+     *
+     * @return bool
      */
     protected function parseOs()
     {
@@ -527,7 +553,7 @@ class Parser implements ParserInterface
         }
 
         if (!$matches) {
-            return;
+            return false;
         }
 
         if (in_array($osRegex['name'], $this->osShorts)) {
@@ -545,8 +571,15 @@ class Parser implements ParserInterface
         if (array_key_exists($this->os['name'], $this->osShorts)) {
             $this->os['short_name'] = $this->osShorts[$this->os['name']];
         }
+
+        return true;
     }
 
+    /**
+     * Parse Browser
+     *
+     * @return bool
+     */
     protected function parseBrowser()
     {
         $matches = false;
@@ -559,7 +592,7 @@ class Parser implements ParserInterface
         }
 
         if (!$matches) {
-            return;
+            return false;
         }
 
         if (in_array($browserRegex['name'], $this->browsers)) {
@@ -573,8 +606,13 @@ class Parser implements ParserInterface
             'short_name' => $short,
             'version' => $this->buildBrowserVersion($browserRegex['version'], $matches)
         );
+
+        return true;
     }
 
+    /**
+     * Parse Mobile
+     */
     protected function parseMobile()
     {
         $mobileRegexes = $this->getMobileRegexes();
@@ -582,6 +620,13 @@ class Parser implements ParserInterface
         $this->parseModel($mobileRegexes);
     }
 
+    /**
+     * Parse Brand
+     *
+     * @param array $mobileRegexes
+     *
+     * @return bool
+     */
     protected function parseBrand($mobileRegexes)
     {
         $matches = false;
@@ -594,7 +639,7 @@ class Parser implements ParserInterface
         }
 
         if (!$matches) {
-            return;
+            return false;
         }
         $this->brand = array_search($brand, $this->deviceBrands);
         $this->brandFullName = $brand;
@@ -607,14 +652,23 @@ class Parser implements ParserInterface
         if (isset($mobileRegex['model'])) {
             $this->modelName = $this->buildModel($mobileRegex['model'], $matches);
         }
+
+        return true;
     }
 
+    /**
+     * Parse Model
+     *
+     * @param array $mobileRegexes
+     *
+     * @return bool
+     */
     protected function parseModel($mobileRegexes)
     {
         $matches = false;
 
         if (empty($this->brand) || !empty($this->modelName)) {
-            return;
+            return false;
         }
 
         foreach ($mobileRegexes[$this->brandFullName]['models'] as $modelRegex) {
@@ -625,7 +679,7 @@ class Parser implements ParserInterface
         }
 
         if (!$matches) {
-            return;
+            return false;
         }
 
         $this->modelName = $this->buildModel($modelRegex['model'], $matches);
@@ -634,6 +688,8 @@ class Parser implements ParserInterface
             $this->deviceTypeFull = $modelRegex['device'];
             $this->deviceType = array_search($this->deviceTypeFull, $this->deviceTypes);
         }
+
+        return true;
     }
 
     protected function matchUserAgent($regex)

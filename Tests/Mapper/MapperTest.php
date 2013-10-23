@@ -49,9 +49,9 @@ class MapperTest extends PHPUnit_Framework_TestCase
         $m1->setMap('browser', $this->confContainer->getMappings()->getBrowser());
         $m1->setMap('browser_family', $this->confContainer->getMappings()->getBrowserFamily());
         $to = $m1->getToInMap('AB', 'browser');
-        $this->assertEquals(1, $to);
+        $this->assertEquals(76, $to);
         $to = $m1->getTo('AB');
-        $this->assertEquals(array(1), $to);
+        $this->assertEquals(array(76), $to);
     }
 
     /**
@@ -62,10 +62,10 @@ class MapperTest extends PHPUnit_Framework_TestCase
         $m1 = new Mapper();
         $m1->setMap('browser', $this->confContainer->getMappings()->getBrowser());
         $m1->setMap('browser_family', $this->confContainer->getMappings()->getBrowserFamily());
-        $to = $m1->getFromInMap(1, 'browser');
+        $to = $m1->getFromInMap(76, 'browser');
         $this->assertEquals('AB', $to);
-        $to = $m1->getFrom(1);
-        $this->assertEquals(array('AB', 'Android Browser'), $to);
+        $to = $m1->getFrom(2);
+        $this->assertEquals(array('AM', 'BlackBerry Browser'), $to);
     }
 
     /**
@@ -94,12 +94,12 @@ class MapperTest extends PHPUnit_Framework_TestCase
         $m1->setMap('device_type', $this->confContainer->getMappings()->getDeviceType());
         $m1->setMap('os_family', $this->confContainer->getMappings()->getOsFamily());
         $m1->setMap('os_short', $this->confContainer->getMappings()->getOsShort());
-        $this->assertEquals('AB', $m1->getFromInMap(1, 'browser'));
-        $this->assertEquals('Android Browser', $m1->getFromInMap(1, 'browser_family'));
-        $this->assertEquals('IBM', $m1->getFromInMap(1, 'desktop_os'));
-        $this->assertEquals('AC', $m1->getFromInMap(1, 'device_brand'));
-        $this->assertEquals('desktop', $m1->getFromInMap(1, 'device_type'));
-        $this->assertEquals('Android', $m1->getFromInMap(1, 'os_family'));
-        $this->assertEquals('AIX', $m1->getFromInMap(1, 'os_short'));
+        $this->assertEquals('AB', $m1->getFromInMap(76, 'browser'));
+        $this->assertEquals('Android Browser', $m1->getFromInMap(11, 'browser_family'));
+        $this->assertEquals('IBM', $m1->getFromInMap(6, 'desktop_os'));
+        $this->assertEquals('AC', $m1->getFromInMap(106, 'device_brand'));
+        $this->assertEquals('desktop', $m1->getFromInMap(8, 'device_type'));
+        $this->assertEquals('Android', $m1->getFromInMap(22, 'os_family'));
+        $this->assertEquals('AIX', $m1->getFromInMap(77, 'os_short'));
     }
 }

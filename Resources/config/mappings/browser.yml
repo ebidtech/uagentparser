@@ -1,6 +1,7 @@
 parameters:
     uap_mapping_browser:
-        AB: 1
+        # 0 is reserved for Null or Not Available
+        # 1 is reserved for Unknown
         AM: 2
         AN: 3
         AR: 4
@@ -75,3 +76,4 @@ parameters:
         UC: 73
         WO: 74
         YA: 75
+        AB: 76

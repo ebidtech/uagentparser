@@ -1,6 +1,7 @@
 parameters:
     uap_mapping_os_family:
-        Android: 1
+        # 0 is reserved for Null or Not Available
+        # 1 is reserved for Unknown
         Apple TV: 2
         BlackBerry: 3
         Bot: 4
@@ -21,3 +22,4 @@ parameters:
         WebTV: 19
         Windows: 20
         Windows Mobile: 21
+        Android: 22

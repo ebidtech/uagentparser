@@ -1,6 +1,7 @@
 parameters:
     uap_mapping_browser_family:
-        Android Browser: 1
+        # 0 is reserved for Null or Not Available
+        # 1 is reserved for Unknown
         BlackBerry Browser: 2
         Chrome: 3
         Firefox: 4
@@ -10,3 +11,4 @@ parameters:
         Nokia Browser: 8
         Opera: 9
         Safari: 10
+        Android Browser: 11
