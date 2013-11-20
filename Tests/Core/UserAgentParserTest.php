@@ -101,7 +101,7 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
 
         $uaStr = 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 ';
         $uaStr .= '(KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3';
-        $uap = new UserAgentParser($uaStr);
+        $uap->setUserAgent($uaStr);
         $this->assertEquals('iPhone', $uap->getDevice()->getName());
         $this->assertEquals('UNK', $uap->getDevice()->getNameShort());
         $this->assertEquals(1, $uap->getDevice()->getId());
@@ -114,7 +114,7 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
 
         $uaStr  = 'Mozilla/5.0 (Linux; U; Android 4.0.4; en-gb; GT-I9300 Build/IMM76D) ';
         $uaStr .='AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30';
-        $uap = new UserAgentParser($uaStr);
+        $uap->setUserAgent($uaStr);
         $this->assertEquals('GT-I9300', $uap->getDevice()->getName());
         $this->assertEquals(
             'UNK',

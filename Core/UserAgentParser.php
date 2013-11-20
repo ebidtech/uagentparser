@@ -156,8 +156,12 @@ class UserAgentParser implements UserAgentParserInterface
     public function setUserAgent($userAgent)
     {
         if ($userAgent != $this->parser->getUserAgent()) {
-            $this->parser->setUserAgent($userAgent);
             $this->rebuildBrowser = $this->rebuildDevice = $this->rebuildOs = true;
+            $this->parser = new Parser($this->confContainer);
+            $this->browser = new Browser();
+            $this->device = new Device();
+            $this->os = new Os();
+            $this->parser->setUserAgent($userAgent);
         }
         return $this;
     }
@@ -279,6 +283,7 @@ class UserAgentParser implements UserAgentParserInterface
                     ->setName(self::USER_AGENT_NULL_STR_LONG)
                     ->setId(self::USER_AGENT_NULL_ID);
             }
+
             /* DEVICE TYPE */
             try {
                 $deviceTypeShort = $this->parser->getDeviceType();
