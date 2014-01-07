@@ -178,7 +178,9 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getBrowser($throwExceptionIfNotFound = false)
     {
-        $this->checkUserAgent($this->parser->getUserAgent());
+        if($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+            throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
+        }
 
         if ($this->rebuildBrowser) {
             try {
@@ -237,7 +239,9 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getDevice($throwExceptionIfNotFound = false)
     {
-        $this->checkUserAgent($this->parser->getUserAgent());
+        if($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+            throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
+        }
 
         if ($this->rebuildDevice) {
             $dBrand = new DeviceBrand();
@@ -312,7 +316,9 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getOs($throwExceptionIfNotFound = false)
     {
-        $this->checkUserAgent($this->parser->getUserAgent());
+        if($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+            throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
+        }
 
         if ($this->rebuildOs) {
 
@@ -361,15 +367,11 @@ class UserAgentParser implements UserAgentParserInterface
     /**
      * @param $userAgent
      *
-     * @throws \EBT\UAgentParser\Exception\InvalidArgumentException
+     * @return bool
      */
-    protected function checkUserAgent($userAgent)
+    protected function isInvalidUserAgent($userAgent)
     {
-        if (is_null($userAgent) ||
-            strlen($userAgent) < self::USER_AGENT_STRING_MIN_LENGTH
-        ) {
-            throw new InvalidArgumentException(sprintf('User agent "%s" is not valid', $userAgent));
-        }
+        return (is_null($userAgent) || strlen($userAgent) < self::USER_AGENT_STRING_MIN_LENGTH);
     }
 
 
