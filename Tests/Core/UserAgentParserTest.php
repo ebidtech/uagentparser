@@ -50,6 +50,14 @@ class UserAgentParserTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \EBT\UAgentParser\Exception\InvalidArgumentException
+     */
+    public function testGetBrowserInvalidUserAgent()
+    {
+        (new UserAgentParser(''))->getBrowser();
+    }
+
+    /**
      * Test OS related methods
      *
      */
