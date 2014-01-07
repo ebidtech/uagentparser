@@ -178,7 +178,7 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getBrowser($throwExceptionIfNotFound = false)
     {
-        if($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+        if ($this->isInvalidUserAgent($this->parser->getUserAgent())) {
             throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
         }
 
@@ -239,7 +239,7 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getDevice($throwExceptionIfNotFound = false)
     {
-        if($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+        if ($this->isInvalidUserAgent($this->parser->getUserAgent())) {
             throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
         }
 
@@ -316,7 +316,7 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getOs($throwExceptionIfNotFound = false)
     {
-        if($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+        if ($this->isInvalidUserAgent($this->parser->getUserAgent())) {
             throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
         }
 
@@ -363,7 +363,6 @@ class UserAgentParser implements UserAgentParserInterface
         return $this->os;
     }
 
-
     /**
      * @param $userAgent
      *
@@ -373,7 +372,6 @@ class UserAgentParser implements UserAgentParserInterface
     {
         return (is_null($userAgent) || strlen($userAgent) < self::USER_AGENT_STRING_MIN_LENGTH);
     }
-
 
     /**
      * Get value from an array
