@@ -14,13 +14,12 @@ namespace EBT\UAgentParser\Core;
 use EBT\UAgentParser\Entities\Browser\Browser;
 use EBT\UAgentParser\Entities\Os\Os;
 use EBT\UAgentParser\Entities\Device\Device;
+use EBT\UAgentParser\Exception\InvalidArgumentException;
 use EBT\UAgentParser\Exception\ResourceNotFoundException;
-use EBT\UAgentParser\Exception\InvalidUserAgentStrException;
 use EBT\UAgentParser\Parser\Parser;
 use EBT\UAgentParser\Configuration\Container as ConfContainer;
 use EBT\UAgentParser\Mapper\Mapper;
 use EBT\UAgentParser\Configuration\YamlFileLoader;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -171,7 +170,7 @@ class UserAgentParser implements UserAgentParserInterface
      *
      * @param bool $throwExceptionIfNotFound
      *
-     * @throws InvalidUserAgentStrException
+     * @throws InvalidArgumentException
      * @throws ResourceNotFoundException
      *
      * @return BrowserInterface
@@ -179,10 +178,8 @@ class UserAgentParser implements UserAgentParserInterface
      */
     public function getBrowser($throwExceptionIfNotFound = false)
     {
-        if (is_null($this->parser->getUserAgent()) ||
-            strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
-        ) {
-            throw new InvalidUserAgentStrException();
+        if ($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+            throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
         }
 
         if ($this->rebuildBrowser) {
@@ -236,16 +233,14 @@ class UserAgentParser implements UserAgentParserInterface
      *
      * @param bool $throwExceptionIfNotFound
      *
-     * @throws InvalidUserAgentStrException
+     * @throws InvalidArgumentException
      * @throws ResourceNotFoundException
      * @return DeviceInterface
      */
     public function getDevice($throwExceptionIfNotFound = false)
     {
-        if (is_null($this->parser->getUserAgent()) ||
-            strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
-        ) {
-            throw new InvalidUserAgentStrException();
+        if ($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+            throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
         }
 
         if ($this->rebuildDevice) {
@@ -315,16 +310,14 @@ class UserAgentParser implements UserAgentParserInterface
      *
      * @param bool $throwExceptionIfNotFound
      *
-     * @throws InvalidUserAgentStrException
+     * @throws InvalidArgumentException
      * @throws ResourceNotFoundException
      * @return OsInterface
      */
     public function getOs($throwExceptionIfNotFound = false)
     {
-        if (is_null($this->parser->getUserAgent()) ||
-            strlen($this->parser->getUserAgent()) < self::USER_AGENT_STRING_MIN_LENGTH
-        ) {
-            throw new InvalidUserAgentStrException();
+        if ($this->isInvalidUserAgent($this->parser->getUserAgent())) {
+            throw InvalidArgumentException::userAgent($this->parser->getUserAgent());
         }
 
         if ($this->rebuildOs) {
@@ -370,6 +363,15 @@ class UserAgentParser implements UserAgentParserInterface
         return $this->os;
     }
 
+    /**
+     * @param $userAgent
+     *
+     * @return bool
+     */
+    protected function isInvalidUserAgent($userAgent)
+    {
+        return (is_null($userAgent) || strlen($userAgent) < self::USER_AGENT_STRING_MIN_LENGTH);
+    }
 
     /**
      * Get value from an array
